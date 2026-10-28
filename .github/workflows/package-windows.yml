@@ -62,7 +62,13 @@ jobs:
       - name: Record build info
         run: |
           New-Item -ItemType Directory -Force -Path dist-output | Out-Null
-          Copy-Item trimmed/apps -Destination dist-output/apps -Recurse
+          # Copy-Item fails on Windows MAX_PATH: pnpm's nested node_modules
+          # under trimmed/apps exceed 260 chars. robocopy handles long
+          # paths; node_modules is excluded (the artifact is a build
+          # skeleton, pnpm install runs wherever it is used). robocopy
+          # exit codes 0-7 mean success, so only >= 8 throws.
+          robocopy trimmed/apps dist-output/apps /E /XD node_modules /NFL /NDL /NJH /NJS
+          if ($LASTEXITCODE -ge 8) { throw "robocopy failed with exit code $LASTEXITCODE" }
           Copy-Item trimmed/package.json -Destination dist-output/package.json
           Copy-Item trimmed/pnpm-lock.yaml -Destination dist-output/pnpm-lock.yaml -ErrorAction SilentlyContinue
           Copy-Item trim-report-ci.json -Destination dist-output/trim-report-ci.json
