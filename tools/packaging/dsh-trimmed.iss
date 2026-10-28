@@ -42,9 +42,11 @@ Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "Path"; Value
 
 [Code]
 const
-  HWND_BROADCAST = $FFFF;
-  WM_SETTINGCHANGE = $001A;
-  SMTO_ABORTIFHUNG = $0002;
+  { Prefixed: Inno Setup 6.7+ predefines HWND_BROADCAST, so an
+    unprefixed declaration is a duplicate identifier (run #11). }
+  DSH_HWND_BROADCAST = $FFFF;
+  DSH_WM_SETTINGCHANGE = $001A;
+  DSH_SMTO_ABORTIFHUNG = $0002;
 
 function SendMessageTimeout(hWnd: Longint; Msg: Cardinal; wParam: Longint; lParam: String; fuFlags: Cardinal; uTimeout: Cardinal; var lpdwResult: Cardinal): Longint;
   external 'SendMessageTimeoutA@user32.dll stdcall';
@@ -53,7 +55,7 @@ procedure BroadcastEnvironmentChange();
 var
   Res: Cardinal;
 begin
-  SendMessageTimeout(HWND_BROADCAST, WM_SETTINGCHANGE, 0, 'Environment', SMTO_ABORTIFHUNG, 5000, Res);
+  SendMessageTimeout(DSH_HWND_BROADCAST, DSH_WM_SETTINGCHANGE, 0, 'Environment', DSH_SMTO_ABORTIFHUNG, 5000, Res);
 end;
 
 function NeedsAddPath(Param: String): Boolean;
