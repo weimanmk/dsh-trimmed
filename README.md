@@ -28,7 +28,8 @@ Upstream code keeps its original license; the trim/repair scripts in
 | `tools/trim-dsh/evidence/` | Loader evidence, Step 18-style session evidence (including real-model 6/6 runs), boot-warning investigation, client-stub verification, and full test logs. All synthetic data; no secrets. |
 | `docs/trimmed-runtime.md` | Full write-up: what was deleted and why, the repair steps, verification evidence, and the honest gaps. Read this first. |
 | `docs/dsh-function-inventory.md` | Function inventory of the original dsh (368 entries) with the conservative retention classification. |
-| `.github/workflows/package-windows.yml` | Windows packaging workflow (created via the GitHub web UI — the GitHub App cannot write workflow files via API). Regenerates, repairs, installs, builds `build:lib:host`, smoke-tests `--help`, and uploads the build outputs. See `PACKAGING-NOTES.md`. |
+| `tools/packaging/stage-installer.py`, `dsh-trimmed.iss` | Installer staging script (pnpm deploy + missing-peer repair + bundled Node) and the Inno Setup 6 installer script. The workflow builds `dsh-trimmed-setup.exe` and smoke-tests install → `--help` → uninstall. See `PACKAGING-NOTES.md`. |
+| `.github/workflows/package-windows.yml` | Windows packaging workflow (created via the GitHub web UI — the GitHub App cannot write workflow files via API). Regenerates, repairs, installs, builds `build:lib:host`, smoke-tests `--help`, stages the installer tree, builds and smoke-tests the installer, and uploads the build outputs and the installer. See `PACKAGING-NOTES.md`. |
 
 Not in this repo (by design): the 129 MB trimmed copy itself, `node_modules`,
 built `lib/` outputs, the native addon, and the 82 MB before/after JSON
@@ -48,9 +49,10 @@ node apps/cli/lib/bin.js --help
 ```
 
 `trim.py` requires the source checkout to be clean and at the pinned commit
-(pass `--allow-dirty-source` only if you know what you are doing). The native
-addon (`build:native-system`) is only needed to start real sessions (file-lock
-support); `--help` does not need it.
+(pass `--allow-dirty-source` only if you know what you are doing). On Windows,
+sessions use the semaphore-based flock implementation and need no native
+addon; on Linux/macOS the addon (`build:native-system`) is needed to start
+real sessions (file-lock support). `--help` needs no addon anywhere.
 
 ## Verified states (honest record)
 
