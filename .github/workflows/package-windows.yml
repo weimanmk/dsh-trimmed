@@ -67,8 +67,14 @@ jobs:
           # paths; node_modules is excluded (the artifact is a build
           # skeleton, pnpm install runs wherever it is used). robocopy
           # exit codes 0-7 mean success, so only >= 8 throws.
-          robocopy trimmed/apps dist-output/apps /E /XD node_modules /NFL /NDL /NJH /NJS
-          if ($LASTEXITCODE -ge 8) { throw "robocopy failed with exit code $LASTEXITCODE" }
+          robocopy trimmed/apps dist-output/apps /E /XD node_modules /NDL /NFL /NJH
+          $robocopyExit = $LASTEXITCODE
+          Write-Host "robocopy exit code: $robocopyExit"
+          if ($robocopyExit -ge 8) { throw "robocopy failed with exit code $robocopyExit" }
+          # robocopy reports success with exit code 1 (files copied); if
+          # $LASTEXITCODE is left nonzero, pwsh exits 1 and the step fails
+          # with no error text (run #4). Reset it once handled.
+          $LASTEXITCODE = 0
           Copy-Item trimmed/package.json -Destination dist-output/package.json
           Copy-Item trimmed/pnpm-lock.yaml -Destination dist-output/pnpm-lock.yaml -ErrorAction SilentlyContinue
           Copy-Item trim-report-ci.json -Destination dist-output/trim-report-ci.json
