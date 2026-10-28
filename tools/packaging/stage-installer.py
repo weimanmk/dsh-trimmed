@@ -194,6 +194,8 @@ def snapshot(src: Path, dst: Path) -> tuple[list[dict], list[str]]:
     exactly this structure, so Node resolution behaves as in the
     pnpm tree. Returns (manifest entries, skipped broken links).
     """
+    if not src.is_dir():
+        raise SystemExit(f"snapshot source missing (deploy failed?): {src}")
     store = dst / "store"
     # NOTE: dst is the stage dir and src (app-raw) lives inside it, so
     # only the store output is cleared here, never dst itself. main()
@@ -329,7 +331,11 @@ def main() -> None:
     ap.add_argument("--source-ref", default="")
     args = ap.parse_args()
 
-    trimmed, stage = args.trimmed, args.stage
+    # Resolve both inputs to absolute paths FIRST: the deploy runs with
+    # cwd=<trimmed>, so a relative --stage would make pnpm create the
+    # deploy target under trimmed/ while snapshot/repair look for it
+    # under the script's cwd (run #9: app-raw "not found").
+    trimmed, stage = args.trimmed.resolve(), args.stage.resolve()
     if not (trimmed / "apps" / "cli" / "package.json").is_file():
         raise SystemExit(f"not a trimmed tree: {trimmed}")
     if stage.resolve() == trimmed.resolve() or stage.resolve() == Path.home():
@@ -348,6 +354,8 @@ def main() -> None:
         else ["pnpm", "--filter", CLI_PACKAGE, "deploy", str(raw), "--prod", "--legacy"]
     )
     run(deploy_cmd, cwd=trimmed)
+    if not (raw / "lib" / "bin.js").is_file():
+        raise SystemExit(f"pnpm deploy did not produce {raw}/lib/bin.js")
     source_map = build_source_map(trimmed)
     repaired = repair(raw, trimmed, source_map)
 
