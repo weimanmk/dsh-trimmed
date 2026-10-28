@@ -63,28 +63,31 @@ def run(cmd: list[str], cwd: Path) -> None:
 
 
 def build_source_map(trimmed: Path) -> dict[str, Path]:
-    """Map package name -> real directory for workspace/vendor packages."""
+    """Map package name -> real directory for workspace/vendor packages.
+
+    Walks every package.json in the tree (depth-capped, node_modules
+    pruned) instead of assuming a fixed group/pkg layout: the native
+    addon entry (@deepseek-ai/node-addon-system) lives at
+    native/system/packages/entry, which a packages/apps/vendor-only scan
+    misses (run #10: repair could not find its source on Windows).
+    """
     mapping: dict[str, Path] = {}
-    roots = [trimmed / "vendor", trimmed / "packages", trimmed / "apps"]
-    for root in roots:
-        if not root.is_dir():
+    skip = {"node_modules", ".git", "__pycache__"}
+    for dirpath, dirnames, filenames in os.walk(trimmed):
+        rel = Path(dirpath).relative_to(trimmed)
+        if len(rel.parts) > 5:
+            dirnames[:] = []
             continue
-        for group in root.iterdir():
-            if not group.is_dir() or group.name.startswith("."):
-                continue
-            # group/pkg layout, but vendor/ holds packages directly too
-            candidates = [group] + (
-                [p for p in group.iterdir() if p.is_dir()] if group.is_dir() else []
-            )
-            for cand in candidates:
-                manifest = cand / "package.json"
-                if not manifest.is_file():
-                    continue
-                try:
-                    name = json.loads(manifest.read_text(encoding="utf-8"))["name"]
-                except Exception:
-                    continue
-                mapping.setdefault(name, cand)
+        dirnames[:] = [d for d in dirnames if d not in skip and not d.startswith(".")]
+        if "package.json" not in filenames:
+            continue
+        try:
+            name = json.loads((Path(dirpath) / "package.json").read_text(encoding="utf-8"))[
+                "name"
+            ]
+        except Exception:
+            continue
+        mapping.setdefault(name, Path(dirpath))
     return mapping
 
 
