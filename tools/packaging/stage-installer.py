@@ -339,10 +339,15 @@ def main() -> None:
     stage.mkdir(parents=True, exist_ok=True)
     raw = stage / "app-raw"
 
-    run(
-        ["pnpm", "--filter", CLI_PACKAGE, "deploy", str(raw), "--prod", "--legacy"],
-        cwd=trimmed,
+    # On Windows, pnpm is a .cmd shim (PNPM_HOME/.bin) and CreateProcess
+    # cannot launch it directly (FileNotFoundError, run #8); route through
+    # cmd.exe. On POSIX, pnpm resolves normally.
+    deploy_cmd = (
+        ["cmd", "/c", "pnpm", "--filter", CLI_PACKAGE, "deploy", str(raw), "--prod", "--legacy"]
+        if os.name == "nt"
+        else ["pnpm", "--filter", CLI_PACKAGE, "deploy", str(raw), "--prod", "--legacy"]
     )
+    run(deploy_cmd, cwd=trimmed)
     source_map = build_source_map(trimmed)
     repaired = repair(raw, trimmed, source_map)
 
