@@ -45,6 +45,24 @@ What trim.py alone leaves broken (found by building the copy on
    to import). Adding `hostPhase: true` emits only their Node half in the host
    pass; no frontend package is restored. Headless sessions already ran
    despite the warning; this removes the noise and the latent import failure.
+8. Dead-surface files excluded from the host typecheck: files under
+   scripts/, the web profile CLI tests, a browser benchmark and one
+   gateway spec import only deleted modules (apps/web, apps/desktop,
+   client/modules, frontend static), and the root tsconfig.host.json
+   include globs pull them into `tsc -p`, which then fails with TS2307
+   (found by running the full build:lib:host locally; the earlier
+   "exit 0" record covered only the host-face tsdown passes, never this
+   tsc step). They stay on disk (a future desktop rebuild may need
+   them) and are added to the root tsconfig.host.json "exclude" array
+   instead of deleted; anything still imported by kept code is pulled
+   back into the program by tsc and would fail loudly, so the exclusion
+   cannot hide a live dependency.
+9. Root scripts: build:lib:host ends with a pnpm --filter bundle step for
+   @deepseek-ai/dsh-desktop, which was deleted with the frontend, so the
+   filter matches nothing and fails. The tail is dropped when the package
+   is absent, and the three script entries that invoke deleted scripts
+   (verify-package-dependencies, verify-client-packages, constraints)
+   are removed.
 
 All steps are idempotent: re-running on an already-repaired copy changes
 nothing. The script refuses to run inside the AEH repository or on the
@@ -164,6 +182,40 @@ def prune_tsconfigs(root: Path) -> list[str]:
     return changed
 
 
+def insert_ts_reference(path: Path, anchor: str, ref: str) -> bool:
+    """Insert a {"path": ref} entry after the anchor's reference object.
+
+    Returns True if the reference is present afterwards. The anchor's
+    object may be single-line or multi-line; the scan stops at the first
+    line at or after the anchor that contains the closing brace, so both
+    formats work. (The previous implementation required the anchor's path
+    line itself to end with "},", which the multi-line format never does,
+    so the session-controller host reference was silently never restored
+    and the Windows CI build failed with TS6059/TS6307 in run #1.)"""
+    lines = path.read_text().splitlines(keepends=True)
+    if any(ref in ln for ln in lines):
+        return True
+    insert_at = None
+    for i, ln in enumerate(lines):
+        if anchor in ln:
+            j = i
+            while j < len(lines) and "}" not in lines[j]:
+                j += 1
+            if j >= len(lines):
+                return False
+            if lines[j].strip() == "}":
+                lines[j] = lines[j].replace("}", "},", 1)
+            insert_at = j + 1
+            break
+    if insert_at is None:
+        return False
+    indent = lines[insert_at - 1][: len(lines[insert_at - 1]) - len(lines[insert_at - 1].lstrip())]
+    entry = indent + "{\n" + indent + f'  "path": "{ref}"\n' + indent + "},\n"
+    lines.insert(insert_at, entry)
+    path.write_text("".join(lines))
+    return any(ref in ln for ln in path.read_text().splitlines())
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--copy", required=True, help="trimmed build copy directory")
@@ -279,15 +331,15 @@ def main() -> int:
         d.setdefault(section, {})["@deepseek-ai/dsh-client-file-upload"] = "workspace:*"
     sc_pkg.write_text(json.dumps(d, indent=2) + "\n")
     sc_ts = root / "packages/api/session-controller/tsconfig.host.json"
-    lines = sc_ts.read_text().splitlines(keepends=True)
-    if not any("client/file-upload" in ln for ln in lines):
-        out = []
-        for ln in lines:
-            out.append(ln)
-            if '"path": "../../core/session"' in ln and ln.strip().endswith("},"):
-                indent = ln[: len(ln) - len(ln.lstrip())]
-                out.append(indent + '{ "path": "../../client/file-upload/tsconfig.host.json" },\n')
-        sc_ts.write_text("".join(out))
+    host_ok = insert_ts_reference(
+        sc_ts, '"path": "../../core/session"', "../../client/file-upload/tsconfig.host.json"
+    )
+    sc_client_ts = root / "packages/api/session-controller/tsconfig.client.json"
+    client_ok = True
+    if sc_client_ts.exists():
+        client_ok = insert_ts_reference(
+            sc_client_ts, '"path": "../../core/session"', "../../client/file-upload/tsconfig.client.json"
+        )
     base_ts = root / "tsconfig.base.json"
     lines = base_ts.read_text().splitlines(keepends=True)
     if not any("dsh-client-file-upload" in ln for ln in lines):
@@ -299,7 +351,13 @@ def main() -> int:
                 out.append(indent + '"@deepseek-ai/dsh-client-file-upload": ["./packages/client/file-upload/src"],\n')
                 out.append(indent + '"@deepseek-ai/dsh-client-file-upload/types": ["./packages/client/file-upload/src/types.ts"],\n')
         base_ts.write_text("".join(out))
-    report["file_upload_seam_restored"] = True
+    base_ok = "dsh-client-file-upload" in base_ts.read_text()
+    report["file_upload_seam_restored"] = bool(host_ok and client_ok and base_ok)
+    if not report["file_upload_seam_restored"]:
+        raise SystemExit(
+            "repair-build: file-upload seam restore failed "
+            f"(host={host_ok} client={client_ok} base={base_ok}); refusing to report success"
+        )
 
     # 5. Delete dev/web-only packages from the host compile set.
     deleted = []
@@ -417,6 +475,107 @@ const PRELOADED_CLIENT_EXTERNALS = [] as const
         path.write_text(s.replace("{ dualClient: true }", "{ dualClient: true, hostPhase: true }"))
         host_half_opt_ins.append(rel)
     report["host_half_opt_ins"] = host_half_opt_ins
+
+    # 8. Exclude dead-surface files from the host typecheck program
+    # (root tsconfig.host.json is JSONC: comments allowed, so edit lines,
+    # never json round-trip). Explicit file entries only: broad globs
+    # like scripts/verify-*.ts would swallow live verifiers.
+    dead_surface_files = [
+        # Whole web-profile e2e subtree: every file in it scaffolds the
+        # deleted web profile (importers pull excluded files back in with
+        # TS6307, so single-file excludes cascade; the subtree is 100%
+        # web-only, verified by listing it).
+        "apps/cli/tests/profiles/web/tests/**/*.ts",
+        "apps/cli/tests/web-agent-presets.e2e.ts",
+        "benchmarks/long-session-browser/long-session.bench.ts",
+        "packages/api/gateway/tests/operator-connect.host.spec.ts",
+        "scripts/browser-bundled-externals.ts",
+        "scripts/browser-bundled-externals.spec.ts",
+        "scripts/check-workspace-constraints.ts",
+        "scripts/check-workspace-constraints.spec.ts",
+        "scripts/client-asset-types.spec.ts",
+        "scripts/optional-bundles.spec.ts",
+        "scripts/shipped-locales.spec.ts",
+        "scripts/verify-client-packages.ts",
+        "scripts/verify-client-packages.spec.ts",
+        "scripts/verify-package-dependencies.ts",
+        "scripts/verify-package-dependencies.spec.ts",
+        "scripts/web-product-bundle-isolation.spec.ts",
+        "scripts/windows-build-workspace.spec.ts",
+        "scripts/benchmark-next-package-dependency.ts",
+        "scripts/benchmark-next-package-dependency.spec.ts",
+        "scripts/verify-product-use.ts",
+        "scripts/verify-product-use.spec.ts",
+        "scripts/verify-default-product-isolation.ts",
+        "scripts/verify-default-product-isolation.spec.ts",
+        "scripts/gen-third-party-notices.ts",
+        "scripts/gen-third-party-notices.spec.ts",
+    ]
+    host_ts = root / "tsconfig.host.json"
+    lines = host_ts.read_text().splitlines(keepends=True)
+    marker = "TRIM: host build excludes files that only exercise deleted surfaces"
+    excl_start = next(
+        i for i, ln in enumerate(lines) if ln.strip().startswith('"exclude"')
+    )
+    excl_end = next(
+        i for i in range(excl_start, len(lines)) if lines[i].strip() in ("]", "],")
+    )
+    block_text = "".join(lines[excl_start:excl_end])
+    missing = [rel for rel in dead_surface_files if f'"{rel}"' not in block_text]
+    if missing:
+        if lines[excl_end - 1].strip() and not lines[excl_end - 1].rstrip().endswith(","):
+            lines[excl_end - 1] = lines[excl_end - 1].rstrip("\n") + ",\n"
+        block = []
+        if not any(marker in ln for ln in lines):
+            block.append(f"    // {marker}; kept on disk for a future desktop rebuild.\n")
+        block += [f'    "{rel}",\n' for rel in missing]
+        lines[excl_end:excl_end] = block
+        host_ts.write_text("".join(lines))
+    after = host_ts.read_text()
+    missing = [rel for rel in dead_surface_files if f'"{rel}"' not in after]
+    if missing:
+        raise SystemExit(f"repair-build: host excludes missing: {missing}")
+    report["host_excludes_added"] = dead_surface_files
+
+    # 9. Root package.json scripts: drop the deleted desktop bundle tail
+    # from build:lib:host and the entries invoking deleted scripts.
+    root_pkg = root / "package.json"
+    d = json.loads(root_pkg.read_text())
+    desktop_present = False
+    for pattern in ("apps/*/package.json", "apps/*/*/package.json",
+                    "packages/*/package.json", "packages/*/*/package.json"):
+        for pkg_path in root.glob(pattern):
+            if json.loads(pkg_path.read_text()).get("name") == "@deepseek-ai/dsh-desktop":
+                desktop_present = True
+                break
+        if desktop_present:
+            break
+    scripts = d.get("scripts", {})
+    if not desktop_present and "build:lib:host" in scripts:
+        scripts["build:lib:host"] = scripts["build:lib:host"].replace(
+            " && pnpm --filter @deepseek-ai/dsh-desktop run bundle", ""
+        )
+    for dead_script in (
+        "verify-package-dependencies",
+        "verify-client-packages",
+        "verify-product-use",
+        "constraints",
+    ):
+        scripts.pop(dead_script, None)
+    d["scripts"] = scripts
+    root_pkg.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
+    d2 = json.loads(root_pkg.read_text())
+    assert "dsh-desktop" not in d2["scripts"].get("build:lib:host", "")
+    assert not any(
+        s in d2["scripts"]
+        for s in (
+            "verify-package-dependencies",
+            "verify-client-packages",
+            "verify-product-use",
+            "constraints",
+        )
+    )
+    report["root_scripts_pruned"] = True
 
     print(json.dumps(report, indent=1))
     return 0

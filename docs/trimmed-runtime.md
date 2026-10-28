@@ -74,6 +74,29 @@ preset）会让构建失败。`tools/trim-dsh/repair-build.py --copy <构建副�
    的配置加载与打包不受影响。真要做 client bundle 会 **loud 失败**（2026-10-28
    在隔离副本实测，见 §5(f) 与 `tools/trim-dsh/evidence/client-stub-<时间戳>/`），
    不会静默产出一份缺组件的客户端包。等桌面前端重做时恢复被删包。
+7. `typert/registry` 与 `api/gateway` 的 tsdown 配置加 `hostPhase: true`
+  （见 §5(e)）。
+8. 根 `tsconfig.host.json` 的 `exclude` 里加死面文件（只测已删 web/
+   desktop/client 面的脚本、web profile e2e、浏览器 benchmark、一个
+   gateway spec 及其互相 import 的 spec）：文件留磁盘（以后桌面重做可能
+   要用），只排除出 host typecheck；仍被 kept 代码 import 的文件会被
+   tsc 拉回并 loud 报错，所以排除藏不住活依赖。排除用显式文件条目
+   （`scripts/verify-*.ts` 这类宽 glob 会误伤活着的 verifier）加一个
+   web tests 子树 glob。
+9. 根 `package.json`：`build:lib:host` 末尾 drop 已删 `dsh-desktop` 的
+   bundle 步骤（pnpm filter 找不到项目会失败），并删 4 个调已删脚本的
+   script 条目（verify-package-dependencies、verify-client-packages、
+   verify-product-use、constraints）。
+
+> 2026-10-28 步骤 4 补 fix：步骤 4 恢复 tsconfig.host.json 引用的锚点只匹配
+> 单行格式（path 行本身以 `},` 结尾），而源文件里该引用是多行格式，锚点
+> 永远匹配不上，引用静默丢失（报告还无条件写 `restored: True`），本地
+> trim-build 能构建是因为它的该文件在分阶段手工构建时已带上引用。Windows
+> CI 首次运行（run #1，`build:lib:host`，TS6059/TS6307）抓住了这个问题。
+> 已改为：按引用对象块扫描插入（单行/多行格式都处理）+ host 与 client 两个
+> face 都恢复 + 写后校验、三项缺一就 loud 失败。修复后在全新 re-trim 副本
+> 上重跑 repair 验证通过（引用落位、JSON 合法、幂等），再跑本地
+> `build:lib:host` 复现 CI 构建。
 
 构建命令（沙箱里 pnpm 写 lockfile 会报 EPERM chown，但包已链接完成，不影响
 构建；用 `tsx` 直接跑构建脚本可绕过 pnpm 的 pre-run 安装检查）：
