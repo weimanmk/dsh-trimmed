@@ -90,10 +90,10 @@ def refuse(path: Path, label: str, source: Path = SOURCE) -> None:
 
 
 def drop_lines_with(path: Path, needles: tuple[str, ...]) -> bool:
-    lines = path.read_text().splitlines(keepends=True)
+    lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
     kept = [ln for ln in lines if not any(n in ln for n in needles)]
     if len(kept) != len(lines):
-        path.write_text("".join(kept))
+        path.write_text("".join(kept), encoding="utf-8")
         return True
     return False
 
@@ -121,7 +121,7 @@ def prune_tsconfigs(root: Path) -> list[str]:
             if not (name == "tsconfig.json" or (name.startswith("tsconfig.") and name.endswith(".json"))):
                 continue
             path = Path(dirpath) / name
-            lines = path.read_text().splitlines(keepends=True)
+            lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
             out: list[str] = []
             i = 0
             dropped = 0
@@ -177,7 +177,7 @@ def prune_tsconfigs(root: Path) -> list[str]:
                 out.append(line)
                 i += 1
             if dropped:
-                path.write_text("".join(out))
+                path.write_text("".join(out), encoding="utf-8")
                 changed.append(str(path.relative_to(root)))
     return changed
 
@@ -192,7 +192,7 @@ def insert_ts_reference(path: Path, anchor: str, ref: str) -> bool:
     line itself to end with "},", which the multi-line format never does,
     so the session-controller host reference was silently never restored
     and the Windows CI build failed with TS6059/TS6307 in run #1.)"""
-    lines = path.read_text().splitlines(keepends=True)
+    lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
     if any(ref in ln for ln in lines):
         return True
     insert_at = None
@@ -212,8 +212,8 @@ def insert_ts_reference(path: Path, anchor: str, ref: str) -> bool:
     indent = lines[insert_at - 1][: len(lines[insert_at - 1]) - len(lines[insert_at - 1].lstrip())]
     entry = indent + "{\n" + indent + f'  "path": "{ref}"\n' + indent + "},\n"
     lines.insert(insert_at, entry)
-    path.write_text("".join(lines))
-    return any(ref in ln for ln in path.read_text().splitlines())
+    path.write_text("".join(lines), encoding="utf-8")
+    return any(ref in ln for ln in path.read_text(encoding="utf-8").splitlines())
 
 
 def main() -> int:
@@ -244,7 +244,7 @@ def main() -> int:
         "exceljs",
         "lexical",
     )
-    lines = ws.read_text().splitlines(keepends=True)
+    lines = ws.read_text(encoding="utf-8").splitlines(keepends=True)
     kept = [
         ln
         for ln in lines
@@ -254,7 +254,7 @@ def main() -> int:
         )
     ]
     if len(kept) != len(lines):
-        ws.write_text("".join(kept))
+        ws.write_text("".join(kept), encoding="utf-8")
     removed_patches = []
     for patch_file in (
         "patches/@electron__osx-sign@1.3.3.patch",
@@ -276,7 +276,7 @@ def main() -> int:
         if victim.exists():
             victim.unlink()
     types_path = wc / "src/types.ts"
-    s = types_path.read_text()
+    s = types_path.read_text(encoding="utf-8")
     s = s.replace(
         """ * Browser-safe request, result, and state-stream vocabulary for the Workspace
  * and directory-picking Remote namespaces this package owns. The picking seam
@@ -299,9 +299,9 @@ def main() -> int:
         "    /** The parent is not fully qualified, the name is not one segment, or creation failed. */\n    'directory-picker/create-failed': { readonly path: string }\n",
     ):
         s = s.replace(entry, "")
-    types_path.write_text(s)
+    types_path.write_text(s, encoding="utf-8")
     index_path = wc / "src/index.ts"
-    s = index_path.read_text()
+    s = index_path.read_text(encoding="utf-8")
     s = s.replace("import { DirectoryPickerController } from './directory-picker.ts'\n", "")
     s = s.replace("export { DirectoryPickerController } from './directory-picker.ts'\n", "")
     s = s.replace(
@@ -313,7 +313,7 @@ def main() -> int:
 """,
         "",
     )
-    index_path.write_text(s)
+    index_path.write_text(s, encoding="utf-8")
     report["directory_picker_seam_removed"] = True
 
     # 3. Dangling tsconfig references (also covers the workspace-controller
@@ -326,10 +326,10 @@ def main() -> int:
     if not fu_dst.exists():
         shutil.copytree(fu_src, fu_dst)
     sc_pkg = root / "packages/api/session-controller/package.json"
-    d = json.loads(sc_pkg.read_text())
+    d = json.loads(sc_pkg.read_text(encoding="utf-8"))
     for section in ("devDependencies", "peerDependencies"):
         d.setdefault(section, {})["@deepseek-ai/dsh-client-file-upload"] = "workspace:*"
-    sc_pkg.write_text(json.dumps(d, indent=2) + "\n")
+    sc_pkg.write_text(json.dumps(d, indent=2) + "\n", encoding="utf-8")
     sc_ts = root / "packages/api/session-controller/tsconfig.host.json"
     host_ok = insert_ts_reference(
         sc_ts, '"path": "../../core/session"', "../../client/file-upload/tsconfig.host.json"
@@ -341,7 +341,7 @@ def main() -> int:
             sc_client_ts, '"path": "../../core/session"', "../../client/file-upload/tsconfig.client.json"
         )
     base_ts = root / "tsconfig.base.json"
-    lines = base_ts.read_text().splitlines(keepends=True)
+    lines = base_ts.read_text(encoding="utf-8").splitlines(keepends=True)
     if not any("dsh-client-file-upload" in ln for ln in lines):
         out = []
         for ln in lines:
@@ -350,8 +350,8 @@ def main() -> int:
                 indent = ln[: len(ln) - len(ln.lstrip())]
                 out.append(indent + '"@deepseek-ai/dsh-client-file-upload": ["./packages/client/file-upload/src"],\n')
                 out.append(indent + '"@deepseek-ai/dsh-client-file-upload/types": ["./packages/client/file-upload/src/types.ts"],\n')
-        base_ts.write_text("".join(out))
-    base_ok = "dsh-client-file-upload" in base_ts.read_text()
+        base_ts.write_text("".join(out), encoding="utf-8")
+    base_ok = "dsh-client-file-upload" in base_ts.read_text(encoding="utf-8")
     report["file_upload_seam_restored"] = bool(host_ok and client_ok and base_ok)
     if not report["file_upload_seam_restored"]:
         raise SystemExit(
@@ -377,7 +377,7 @@ def main() -> int:
     # 6. Client bundle preset stub (values inlined verbatim from the deleted
     # sources; see the TRIM-BUILD STUB comment written into the file).
     preset = root / "packages/client/tsdown.client.ts"
-    s = preset.read_text()
+    s = preset.read_text(encoding="utf-8")
     if "./modules/src/assets.ts" in s:
         old = """import {
   PACKAGE_ASSET_EXPORT,
@@ -449,7 +449,7 @@ const PLATFORM_MODULES = [
 const PRELOADED_CLIENT_EXTERNALS = [] as const
 """
         assert old in s, "preset import block not found; already stubbed or upstream changed"
-        preset.write_text(s.replace(old, new))
+        preset.write_text(s.replace(old, new), encoding="utf-8")
         report["preset_stub_applied"] = True
     else:
         report["preset_stub_applied"] = False
@@ -468,11 +468,11 @@ const PRELOADED_CLIENT_EXTERNALS = [] as const
         path = root / rel
         if not path.exists():
             continue
-        s = path.read_text()
+        s = path.read_text(encoding="utf-8")
         if "hostPhase" in s:
             continue
         assert "{ dualClient: true }" in s, f"unexpected tsdown config: {rel}"
-        path.write_text(s.replace("{ dualClient: true }", "{ dualClient: true, hostPhase: true }"))
+        path.write_text(s.replace("{ dualClient: true }", "{ dualClient: true, hostPhase: true }"), encoding="utf-8")
         host_half_opt_ins.append(rel)
     report["host_half_opt_ins"] = host_half_opt_ins
 
@@ -512,7 +512,7 @@ const PRELOADED_CLIENT_EXTERNALS = [] as const
         "scripts/gen-third-party-notices.spec.ts",
     ]
     host_ts = root / "tsconfig.host.json"
-    lines = host_ts.read_text().splitlines(keepends=True)
+    lines = host_ts.read_text(encoding="utf-8").splitlines(keepends=True)
     marker = "TRIM: host build excludes files that only exercise deleted surfaces"
     excl_start = next(
         i for i, ln in enumerate(lines) if ln.strip().startswith('"exclude"')
@@ -530,8 +530,8 @@ const PRELOADED_CLIENT_EXTERNALS = [] as const
             block.append(f"    // {marker}; kept on disk for a future desktop rebuild.\n")
         block += [f'    "{rel}",\n' for rel in missing]
         lines[excl_end:excl_end] = block
-        host_ts.write_text("".join(lines))
-    after = host_ts.read_text()
+        host_ts.write_text("".join(lines), encoding="utf-8")
+    after = host_ts.read_text(encoding="utf-8")
     missing = [rel for rel in dead_surface_files if f'"{rel}"' not in after]
     if missing:
         raise SystemExit(f"repair-build: host excludes missing: {missing}")
@@ -540,12 +540,12 @@ const PRELOADED_CLIENT_EXTERNALS = [] as const
     # 9. Root package.json scripts: drop the deleted desktop bundle tail
     # from build:lib:host and the entries invoking deleted scripts.
     root_pkg = root / "package.json"
-    d = json.loads(root_pkg.read_text())
+    d = json.loads(root_pkg.read_text(encoding="utf-8"))
     desktop_present = False
     for pattern in ("apps/*/package.json", "apps/*/*/package.json",
                     "packages/*/package.json", "packages/*/*/package.json"):
         for pkg_path in root.glob(pattern):
-            if json.loads(pkg_path.read_text()).get("name") == "@deepseek-ai/dsh-desktop":
+            if json.loads(pkg_path.read_text(encoding="utf-8")).get("name") == "@deepseek-ai/dsh-desktop":
                 desktop_present = True
                 break
         if desktop_present:
@@ -563,8 +563,8 @@ const PRELOADED_CLIENT_EXTERNALS = [] as const
     ):
         scripts.pop(dead_script, None)
     d["scripts"] = scripts
-    root_pkg.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n")
-    d2 = json.loads(root_pkg.read_text())
+    root_pkg.write_text(json.dumps(d, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    d2 = json.loads(root_pkg.read_text(encoding="utf-8"))
     assert "dsh-desktop" not in d2["scripts"].get("build:lib:host", "")
     assert not any(
         s in d2["scripts"]

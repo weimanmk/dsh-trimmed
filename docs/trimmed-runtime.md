@@ -87,6 +87,11 @@ preset）会让构建失败。`tools/trim-dsh/repair-build.py --copy <构建副�
    bundle 步骤（pnpm filter 找不到项目会失败），并删 4 个调已删脚本的
    script 条目（verify-package-dependencies、verify-client-packages、
    verify-product-use、constraints）。
+10. 编码：脚本内所有文件读写一律显式 `encoding="utf-8"`。Windows 上
+    `Path.read_text()` 默认走 cp1252，上游多个 `package.json` 含
+    UTF-8 非 ASCII 字节，CI run #2 在 Repair 步骤 0 秒崩溃
+    （`UnicodeDecodeError`，新加的 package 名扫描循环处）；Linux 默认
+    UTF-8 所以本地一直没暴露。
 
 > 2026-10-28 步骤 4 补 fix：步骤 4 恢复 tsconfig.host.json 引用的锚点只匹配
 > 单行格式（path 行本身以 `},` 结尾），而源文件里该引用是多行格式，锚点
