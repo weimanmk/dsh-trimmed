@@ -16,15 +16,21 @@ standalone program: running it still needs Node.js 24 and `node_modules`
    the earlier Linux session failure (missing flock addon) showed exactly
    where a session would stop without it. Add a `build:native-system` step
    before any session-level smoke test.
-2. **Single-file exe (Node SEA).** Unproven for this tree. Two concrete
+2. **Single-file exe (Node SEA).** Unproven for this tree. Three concrete
    blockers: the CLI entry resolves workspace packages out of
-   `node_modules` (a SEA blob embeds one file, not a package tree), and the
+   `node_modules` (a SEA blob embeds one file, not a package tree); the
    native addon cannot be loaded from inside the SEA virtual filesystem
-   (Node docs: native addons must be extracted to a temp file first). The
-   workflow's SEA step is a best-effort probe (`continue-on-error`): it
-   embeds the real CLI entry, tries to run the resulting exe with `--help`,
-   and records the outcome in `sea-attempt.log`. Until that probe passes
-   with a bundled entry point, do not call any produced `.exe` a release.
+   (Node docs: native addons must be extracted to a temp file first); and
+   blob injection is not a Node flag at all. Run #5 evidence
+   (2026-10-28): the probe's `node --build-sea` failed with `bad option`
+   on Node 24.22.1 — injection needs `postject` (or an equivalent tool),
+   which the probe did not use, so its exe was a plain node copy printing
+   node help. Next trial: inject the blob with postject, then re-probe;
+   the node_modules/native-addon blockers remain. The workflow's SEA step
+   stays a best-effort probe (`continue-on-error`): it embeds the real CLI
+   entry, tries to run the resulting exe with `--help`, and records the
+   outcome in `sea-attempt.log`. Until that probe passes with a bundled
+   entry point, do not call any produced `.exe` a release.
 3. **Desktop.** The Electron shell was deleted from the trimmed tree, so
    there is no desktop installer to package from this repo. The desktop
    frontend must be rebuilt first (separate work, tracked in the AEH repo).
