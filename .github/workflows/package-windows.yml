@@ -107,9 +107,16 @@ jobs:
       - name: Smoke test installer
         run: |
           $installDir = Join-Path $env:RUNNER_TEMP 'dsh-trimmed-install'
+          $installLog = Join-Path $env:RUNNER_TEMP 'dsh-trimmed-install.log'
           $setup = Get-ChildItem installer-out\dsh-trimmed-setup.exe | Select-Object -First 1 -ExpandProperty FullName
-          & $setup /SILENT /SUPPRESSMSGBOXES "/DIR=$installDir" /NORESTART
-          if ($LASTEXITCODE -ne 0) { throw "installer exited $LASTEXITCODE" }
+          & $setup /SILENT /SUPPRESSMSGBOXES "/DIR=$installDir" "/LOG=$installLog" /NORESTART
+          $setupCode = $LASTEXITCODE
+          if (Test-Path $installLog) { Get-Content $installLog -Tail 60 }
+          $treeLog = Join-Path $env:TEMP 'dsh-trimmed-setup-tree.log'
+          if (Test-Path $treeLog) { Get-Content $treeLog }
+          $treeErr = Join-Path $installDir 'setup-tree-error.log'
+          if (Test-Path $treeErr) { Get-Content $treeErr }
+          if ($setupCode -ne 0) { throw "installer exited $setupCode" }
           $LASTEXITCODE = 0
           $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'dsh-home-installed'
           & "$installDir\dsh-trimmed.cmd" --help
