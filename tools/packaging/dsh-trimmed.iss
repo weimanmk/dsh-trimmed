@@ -110,10 +110,12 @@ begin
     { Rebuild the runtime tree from store/ + app-manifest.json. This must
       fail the install loudly: a silent setup failure would leave a
       broken CLI that looks installed. }
+    Log('setup-tree: launching ' + ExpandConstant('{app}\node.exe') + ' ' + ExpandConstant('{app}\setup-tree.cjs'));
     if not Exec(ExpandConstant('{app}\node.exe'),
       '"' + ExpandConstant('{app}\setup-tree.cjs') + '" "' + ExpandConstant('{app}') + '"',
       '', SW_HIDE, ewWaitUntilTerminated, ResultCode) then
       RaiseException('Could not run setup-tree.cjs (Exec failed).');
+    Log('setup-tree: exit code ' + IntToStr(ResultCode));
     if ResultCode <> 0 then
       RaiseException('setup-tree.cjs failed with exit code ' + IntToStr(ResultCode) + '.');
   end;
