@@ -37,6 +37,13 @@ Source: "{#StageDir}\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs c
 Name: "{group}\DSH Trimmed"; Filename: "{cmd}"; Parameters: "/k ""{app}\dsh-trimmed.cmd"" --help"; WorkingDir: "{app}"
 Name: "{group}\Uninstall DSH Trimmed"; Filename: "{uninstallexe}"
 
+{ app/ is created by setup-tree.cjs at install time, not by [Files], so the
+  uninstaller does not know about it; without this the install dir survives
+  uninstall (run #15: uninstall exited 0 but the dir remained). }
+[UninstallDelete]
+Type: filesandordirs; Name: "{app}\app"
+Type: files; Name: "{app}\setup-tree-error.log"
+
 [Registry]
 Root: HKCU; Subkey: "Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}"; Check: NeedsAddPath(ExpandConstant('{app}'))
 
