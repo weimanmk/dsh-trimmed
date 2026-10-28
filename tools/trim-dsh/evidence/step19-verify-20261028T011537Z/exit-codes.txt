@@ -1,0 +1,4 @@
+python_tests_rc=0
+typecheck_rc=0
+frontend_build_rc=0
+node_tests_rc=0

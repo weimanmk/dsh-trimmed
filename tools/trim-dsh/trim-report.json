@@ -1,0 +1,1351 @@
+{
+  "schema": 1,
+  "source": {
+    "repo": "/home/hatch/workspace/deepseek-harness",
+    "upstream": "https://github.com/deepseek-ai/deepseek-harness",
+    "commit": "22ddee3792402c3e70ec5f86a63c3e3e895a2f60",
+    "version": "0.2.1-rc.3",
+    "observed_at": "2026-10-27"
+  },
+  "destination": "/tmp/dsh-trimmed",
+  "deleted_groups": [
+    {
+      "id": "p1-deprecated",
+      "reason": "Daniel approved exactly this one self-declared Deprecated P1 package; the 1017 badge stays.",
+      "paths": [
+        "packages/core/agent-tool-presentation"
+      ]
+    },
+    {
+      "id": "frontend-apps",
+      "reason": "Web, Electron shell, and plugin-market generator are removed; the desktop frontend will be rebuilt later.",
+      "paths": [
+        "apps/web",
+        "apps/desktop",
+        "apps/plugin-market-generator"
+      ]
+    },
+    {
+      "id": "web-bundle",
+      "reason": "The browser surface bundle is not part of headless or desktop-host.",
+      "paths": [
+        "packages/bundle/web-app"
+      ]
+    },
+    {
+      "id": "client-web-ui",
+      "reason": "Frontend client/Web UI packages. dsh-client-connection stays as the shared transport required by desktop-host; the 1017 badge is explicitly retained.",
+      "paths": [
+        "packages/client/file-upload",
+        "packages/client/hmr",
+        "packages/client/locale",
+        "packages/client/modules",
+        "packages/client/product-analytics",
+        "packages/client/resources",
+        "packages/client/shortcuts",
+        "packages/client/store",
+        "packages/client/ui-agent-preset",
+        "packages/client/ui-approval",
+        "packages/client/ui-attachment",
+        "packages/client/ui-brand-official",
+        "packages/client/ui-chat",
+        "packages/client/ui-commands",
+        "packages/client/ui-conversation",
+        "packages/client/ui-deliverables",
+        "packages/client/ui-directory-picker-browse",
+        "packages/client/ui-directory-picker-native",
+        "packages/client/ui-dockkit",
+        "packages/client/ui-entry-customization",
+        "packages/client/ui-file-drag",
+        "packages/client/ui-goal",
+        "packages/client/ui-input-trigger",
+        "packages/client/ui-jobs",
+        "packages/client/ui-layout",
+        "packages/client/ui-message-feedback",
+        "packages/client/ui-model-selection",
+        "packages/client/ui-open-in-app",
+        "packages/client/ui-permission-presets",
+        "packages/client/ui-plan",
+        "packages/client/ui-plugin-manager",
+        "packages/client/ui-plugin-market",
+        "packages/client/ui-primitives",
+        "packages/client/ui-reference",
+        "packages/client/ui-renderer",
+        "packages/client/ui-schedule",
+        "packages/client/ui-secret-mask",
+        "packages/client/ui-session",
+        "packages/client/ui-settings",
+        "packages/client/ui-settings-account",
+        "packages/client/ui-settings-agent-loop",
+        "packages/client/ui-settings-general",
+        "packages/client/ui-settings-models",
+        "packages/client/ui-settings-plugin-inventory",
+        "packages/client/ui-settings-plugins",
+        "packages/client/ui-settings-session-log",
+        "packages/client/ui-settings-shell",
+        "packages/client/ui-settings-subagent",
+        "packages/client/ui-settings-web-search",
+        "packages/client/ui-shortcuts",
+        "packages/client/ui-sidebar",
+        "packages/client/ui-sidebar-browser",
+        "packages/client/ui-sidebar-documentpreview",
+        "packages/client/ui-sidebar-files",
+        "packages/client/ui-sidebar-right",
+        "packages/client/ui-sidebar-terminal",
+        "packages/client/ui-skill",
+        "packages/client/ui-slots",
+        "packages/client/ui-subagent",
+        "packages/client/ui-theme",
+        "packages/client/ui-tool",
+        "packages/client/ui-trajectory",
+        "packages/client/ui-user-questions",
+        "packages/client/ui-workflow-run",
+        "packages/client/ui-workspace",
+        "packages/client/web",
+        "packages/extensions/ui-cordis",
+        "packages/experimental/client-ui-action-cards",
+        "packages/experimental/client-ui-agent-team",
+        "packages/experimental/client-ui-claude-code-mods",
+        "packages/experimental/client-ui-cot-translation",
+        "packages/experimental/client-ui-creation-recommendations",
+        "packages/experimental/client-ui-plugin-recommendations",
+        "packages/experimental/client-ui-voice-input"
+      ]
+    },
+    {
+      "id": "web-host-support",
+      "reason": "Host-side packages whose only product surface was serving or driving the deleted Web UI.",
+      "paths": [
+        "packages/host/frontend-static",
+        "packages/host/directory-picker",
+        "packages/host/directory-picker-auto",
+        "packages/host/directory-picker-browse",
+        "packages/host/directory-picker-native",
+        "packages/host/open-in-app"
+      ]
+    },
+    {
+      "id": "frontend-feature-bundles",
+      "reason": "Optional bundles that only assembled deleted browser UI packages. Their backend feature packages stay.",
+      "paths": [
+        "packages/experimental/cot-translation-bundle",
+        "packages/experimental/plugin-market-bundle",
+        "packages/experimental/voice-input-bundle"
+      ]
+    }
+  ],
+  "deleted_package_count": 88,
+  "deleted_paths": [
+    "packages/core/agent-tool-presentation",
+    "apps/web",
+    "apps/desktop",
+    "apps/plugin-market-generator",
+    "packages/bundle/web-app",
+    "packages/client/file-upload",
+    "packages/client/hmr",
+    "packages/client/locale",
+    "packages/client/modules",
+    "packages/client/product-analytics",
+    "packages/client/resources",
+    "packages/client/shortcuts",
+    "packages/client/store",
+    "packages/client/ui-agent-preset",
+    "packages/client/ui-approval",
+    "packages/client/ui-attachment",
+    "packages/client/ui-brand-official",
+    "packages/client/ui-chat",
+    "packages/client/ui-commands",
+    "packages/client/ui-conversation",
+    "packages/client/ui-deliverables",
+    "packages/client/ui-directory-picker-browse",
+    "packages/client/ui-directory-picker-native",
+    "packages/client/ui-dockkit",
+    "packages/client/ui-entry-customization",
+    "packages/client/ui-file-drag",
+    "packages/client/ui-goal",
+    "packages/client/ui-input-trigger",
+    "packages/client/ui-jobs",
+    "packages/client/ui-layout",
+    "packages/client/ui-message-feedback",
+    "packages/client/ui-model-selection",
+    "packages/client/ui-open-in-app",
+    "packages/client/ui-permission-presets",
+    "packages/client/ui-plan",
+    "packages/client/ui-plugin-manager",
+    "packages/client/ui-plugin-market",
+    "packages/client/ui-primitives",
+    "packages/client/ui-reference",
+    "packages/client/ui-renderer",
+    "packages/client/ui-schedule",
+    "packages/client/ui-secret-mask",
+    "packages/client/ui-session",
+    "packages/client/ui-settings",
+    "packages/client/ui-settings-account",
+    "packages/client/ui-settings-agent-loop",
+    "packages/client/ui-settings-general",
+    "packages/client/ui-settings-models",
+    "packages/client/ui-settings-plugin-inventory",
+    "packages/client/ui-settings-plugins",
+    "packages/client/ui-settings-session-log",
+    "packages/client/ui-settings-shell",
+    "packages/client/ui-settings-subagent",
+    "packages/client/ui-settings-web-search",
+    "packages/client/ui-shortcuts",
+    "packages/client/ui-sidebar",
+    "packages/client/ui-sidebar-browser",
+    "packages/client/ui-sidebar-documentpreview",
+    "packages/client/ui-sidebar-files",
+    "packages/client/ui-sidebar-right",
+    "packages/client/ui-sidebar-terminal",
+    "packages/client/ui-skill",
+    "packages/client/ui-slots",
+    "packages/client/ui-subagent",
+    "packages/client/ui-theme",
+    "packages/client/ui-tool",
+    "packages/client/ui-trajectory",
+    "packages/client/ui-user-questions",
+    "packages/client/ui-workflow-run",
+    "packages/client/ui-workspace",
+    "packages/client/web",
+    "packages/extensions/ui-cordis",
+    "packages/experimental/client-ui-action-cards",
+    "packages/experimental/client-ui-agent-team",
+    "packages/experimental/client-ui-claude-code-mods",
+    "packages/experimental/client-ui-cot-translation",
+    "packages/experimental/client-ui-creation-recommendations",
+    "packages/experimental/client-ui-plugin-recommendations",
+    "packages/experimental/client-ui-voice-input",
+    "packages/host/frontend-static",
+    "packages/host/directory-picker",
+    "packages/host/directory-picker-auto",
+    "packages/host/directory-picker-browse",
+    "packages/host/directory-picker-native",
+    "packages/host/open-in-app",
+    "packages/experimental/cot-translation-bundle",
+    "packages/experimental/plugin-market-bundle",
+    "packages/experimental/voice-input-bundle"
+  ],
+  "deleted_packages": [
+    {
+      "path": "packages/core/agent-tool-presentation",
+      "package": "@deepseek-ai/dsh-agent-tool-presentation",
+      "group": "p1-deprecated"
+    },
+    {
+      "path": "apps/web",
+      "package": "@deepseek-ai/dsh-web-frontend",
+      "group": "frontend-apps"
+    },
+    {
+      "path": "apps/desktop",
+      "package": "@deepseek-ai/dsh-desktop",
+      "group": "frontend-apps"
+    },
+    {
+      "path": "apps/plugin-market-generator",
+      "package": "@deepseek-ai/dsh-plugin-market-generator",
+      "group": "frontend-apps"
+    },
+    {
+      "path": "packages/bundle/web-app",
+      "package": "@deepseek-ai/dsh-web-app",
+      "group": "web-bundle"
+    },
+    {
+      "path": "packages/client/file-upload",
+      "package": "@deepseek-ai/dsh-client-file-upload",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/hmr",
+      "package": "@deepseek-ai/dsh-client-hmr",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/locale",
+      "package": "@deepseek-ai/dsh-client-locale",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/modules",
+      "package": "@deepseek-ai/dsh-client-modules",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/product-analytics",
+      "package": "@deepseek-ai/dsh-client-product-analytics",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/resources",
+      "package": "@deepseek-ai/dsh-client-resources",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/shortcuts",
+      "package": "@deepseek-ai/dsh-client-shortcuts",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/store",
+      "package": "@deepseek-ai/dsh-client-store",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-agent-preset",
+      "package": "@deepseek-ai/dsh-client-ui-agent-preset",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-approval",
+      "package": "@deepseek-ai/dsh-client-ui-approval",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-attachment",
+      "package": "@deepseek-ai/dsh-client-ui-attachment",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-brand-official",
+      "package": "@deepseek-ai/dsh-client-ui-brand-official",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-chat",
+      "package": "@deepseek-ai/dsh-client-ui-chat",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-commands",
+      "package": "@deepseek-ai/dsh-client-ui-commands",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-conversation",
+      "package": "@deepseek-ai/dsh-client-ui-conversation",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-deliverables",
+      "package": "@deepseek-ai/dsh-client-ui-deliverables",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-directory-picker-browse",
+      "package": "@deepseek-ai/dsh-client-ui-directory-picker-browse",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-directory-picker-native",
+      "package": "@deepseek-ai/dsh-client-ui-directory-picker-native",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-dockkit",
+      "package": "@deepseek-ai/dsh-client-ui-dockkit",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-entry-customization",
+      "package": "@deepseek-ai/dsh-client-ui-entry-customization",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-file-drag",
+      "package": "@deepseek-ai/dsh-client-ui-file-drag",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-goal",
+      "package": "@deepseek-ai/dsh-client-ui-goal",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-input-trigger",
+      "package": "@deepseek-ai/dsh-client-ui-input-trigger",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-jobs",
+      "package": "@deepseek-ai/dsh-client-ui-jobs",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-layout",
+      "package": "@deepseek-ai/dsh-client-ui-layout",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-message-feedback",
+      "package": "@deepseek-ai/dsh-client-ui-message-feedback",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-model-selection",
+      "package": "@deepseek-ai/dsh-client-ui-model-selection",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-open-in-app",
+      "package": "@deepseek-ai/dsh-client-ui-open-in-app",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-permission-presets",
+      "package": "@deepseek-ai/dsh-client-ui-permission-presets",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-plan",
+      "package": "@deepseek-ai/dsh-client-ui-plan",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-plugin-manager",
+      "package": "@deepseek-ai/dsh-client-ui-plugin-manager",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-plugin-market",
+      "package": "@deepseek-ai/dsh-client-ui-plugin-market",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-primitives",
+      "package": "@deepseek-ai/dsh-client-ui-primitives",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-reference",
+      "package": "@deepseek-ai/dsh-client-ui-reference",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-renderer",
+      "package": "@deepseek-ai/dsh-client-ui-renderer",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-schedule",
+      "package": "@deepseek-ai/dsh-client-ui-schedule",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-secret-mask",
+      "package": "@deepseek-ai/dsh-client-ui-secret-mask",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-session",
+      "package": "@deepseek-ai/dsh-client-ui-session",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings",
+      "package": "@deepseek-ai/dsh-client-ui-settings",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings-account",
+      "package": "@deepseek-ai/dsh-client-ui-settings-account",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings-agent-loop",
+      "package": "@deepseek-ai/dsh-client-ui-settings-agent-loop",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings-general",
+      "package": "@deepseek-ai/dsh-client-ui-settings-general",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings-models",
+      "package": "@deepseek-ai/dsh-client-ui-settings-models",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings-plugin-inventory",
+      "package": "@deepseek-ai/dsh-client-ui-settings-plugin-inventory",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings-plugins",
+      "package": "@deepseek-ai/dsh-client-ui-settings-plugins",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings-session-log",
+      "package": "@deepseek-ai/dsh-client-ui-settings-session-log",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings-shell",
+      "package": "@deepseek-ai/dsh-client-ui-settings-shell",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings-subagent",
+      "package": "@deepseek-ai/dsh-client-ui-settings-subagent",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-settings-web-search",
+      "package": "@deepseek-ai/dsh-client-ui-settings-web-search",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-shortcuts",
+      "package": "@deepseek-ai/dsh-client-ui-shortcuts",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-sidebar",
+      "package": "@deepseek-ai/dsh-client-ui-sidebar",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-sidebar-browser",
+      "package": "@deepseek-ai/dsh-client-ui-sidebar-browser",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-sidebar-documentpreview",
+      "package": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-sidebar-files",
+      "package": "@deepseek-ai/dsh-client-ui-sidebar-files",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-sidebar-right",
+      "package": "@deepseek-ai/dsh-client-ui-sidebar-right",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-sidebar-terminal",
+      "package": "@deepseek-ai/dsh-client-ui-sidebar-terminal",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-skill",
+      "package": "@deepseek-ai/dsh-client-ui-skill",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-slots",
+      "package": "@deepseek-ai/dsh-client-ui-slots",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-subagent",
+      "package": "@deepseek-ai/dsh-client-ui-subagent",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-theme",
+      "package": "@deepseek-ai/dsh-client-ui-theme",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-tool",
+      "package": "@deepseek-ai/dsh-client-ui-tool",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-trajectory",
+      "package": "@deepseek-ai/dsh-client-ui-trajectory",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-user-questions",
+      "package": "@deepseek-ai/dsh-client-ui-user-questions",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-workflow-run",
+      "package": "@deepseek-ai/dsh-client-ui-workflow-run",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/ui-workspace",
+      "package": "@deepseek-ai/dsh-client-ui-workspace",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/client/web",
+      "package": "@deepseek-ai/dsh-client-web",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/extensions/ui-cordis",
+      "package": "@deepseek-ai/dsh-client-ui-cordis",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/experimental/client-ui-action-cards",
+      "package": "@deepseek-ai/dsh-client-ui-action-cards",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/experimental/client-ui-agent-team",
+      "package": "@deepseek-ai/dsh-experimental-client-ui-agent-team",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/experimental/client-ui-claude-code-mods",
+      "package": "@deepseek-ai/dsh-experimental-client-ui-claude-code-mods",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/experimental/client-ui-cot-translation",
+      "package": "@deepseek-ai/dsh-experimental-client-ui-cot-translation",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/experimental/client-ui-creation-recommendations",
+      "package": "@deepseek-ai/dsh-client-ui-creation-recommendations",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/experimental/client-ui-plugin-recommendations",
+      "package": "@deepseek-ai/dsh-client-ui-plugin-recommendations",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/experimental/client-ui-voice-input",
+      "package": "@deepseek-ai/dsh-experimental-client-ui-voice-input",
+      "group": "client-web-ui"
+    },
+    {
+      "path": "packages/host/frontend-static",
+      "package": "@deepseek-ai/dsh-host-frontend-static",
+      "group": "web-host-support"
+    },
+    {
+      "path": "packages/host/directory-picker",
+      "package": "@deepseek-ai/dsh-host-directory-picker",
+      "group": "web-host-support"
+    },
+    {
+      "path": "packages/host/directory-picker-auto",
+      "package": "@deepseek-ai/dsh-host-directory-picker-auto",
+      "group": "web-host-support"
+    },
+    {
+      "path": "packages/host/directory-picker-browse",
+      "package": "@deepseek-ai/dsh-host-directory-picker-browse",
+      "group": "web-host-support"
+    },
+    {
+      "path": "packages/host/directory-picker-native",
+      "package": "@deepseek-ai/dsh-host-directory-picker-native",
+      "group": "web-host-support"
+    },
+    {
+      "path": "packages/host/open-in-app",
+      "package": "@deepseek-ai/dsh-host-open-in-app",
+      "group": "web-host-support"
+    },
+    {
+      "path": "packages/experimental/cot-translation-bundle",
+      "package": "@deepseek-ai/dsh-experimental-cot-translation-bundle",
+      "group": "frontend-feature-bundles"
+    },
+    {
+      "path": "packages/experimental/plugin-market-bundle",
+      "package": "@deepseek-ai/dsh-experimental-plugin-market-bundle",
+      "group": "frontend-feature-bundles"
+    },
+    {
+      "path": "packages/experimental/voice-input-bundle",
+      "package": "@deepseek-ai/dsh-experimental-voice-input-bundle",
+      "group": "frontend-feature-bundles"
+    }
+  ],
+  "p1_deleted": [
+    "@deepseek-ai/dsh-agent-tool-presentation"
+  ],
+  "pruned_dependency_edges": [
+    {
+      "package_json": "benchmarks/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-store",
+        "devDependencies:@deepseek-ai/dsh-client-ui-chat",
+        "devDependencies:@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    },
+    {
+      "package_json": "python/sdk-runtime/package.json",
+      "removed_edges": [
+        "dependencies:@deepseek-ai/dsh-agent-tool-presentation",
+        "dependencies:@deepseek-ai/dsh-client-file-upload"
+      ]
+    },
+    {
+      "package_json": "packages/test-support/client-runtime/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-hmr",
+        "devDependencies:@deepseek-ai/dsh-client-locale",
+        "devDependencies:@deepseek-ai/dsh-client-modules",
+        "devDependencies:@deepseek-ai/dsh-client-store",
+        "devDependencies:@deepseek-ai/dsh-client-ui-chat",
+        "devDependencies:@deepseek-ai/dsh-client-ui-conversation",
+        "devDependencies:@deepseek-ai/dsh-client-ui-layout",
+        "devDependencies:@deepseek-ai/dsh-client-ui-renderer",
+        "devDependencies:@deepseek-ai/dsh-client-ui-session",
+        "devDependencies:@deepseek-ai/dsh-client-ui-settings",
+        "devDependencies:@deepseek-ai/dsh-client-ui-slots",
+        "devDependencies:@deepseek-ai/dsh-client-ui-workspace",
+        "devDependencies:@deepseek-ai/dsh-client-web",
+        "devDependencies:@deepseek-ai/dsh-web-app",
+        "peerDependencies:@deepseek-ai/dsh-client-hmr",
+        "peerDependencies:@deepseek-ai/dsh-client-modules",
+        "peerDependencies:@deepseek-ai/dsh-client-store",
+        "peerDependencies:@deepseek-ai/dsh-client-ui-chat",
+        "peerDependencies:@deepseek-ai/dsh-client-ui-conversation",
+        "peerDependencies:@deepseek-ai/dsh-client-ui-renderer",
+        "peerDependencies:@deepseek-ai/dsh-client-ui-session",
+        "peerDependencies:@deepseek-ai/dsh-client-ui-settings",
+        "peerDependencies:@deepseek-ai/dsh-client-ui-slots",
+        "peerDependencies:@deepseek-ai/dsh-client-web"
+      ]
+    },
+    {
+      "package_json": "packages/session/message-quotes/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-locale",
+        "devDependencies:@deepseek-ai/dsh-client-ui-chat",
+        "devDependencies:@deepseek-ai/dsh-client-ui-conversation",
+        "devDependencies:@deepseek-ai/dsh-client-ui-renderer",
+        "devDependencies:@deepseek-ai/dsh-client-ui-slots",
+        "devDependencies:@deepseek-ai/dsh-client-ui-primitives"
+      ]
+    },
+    {
+      "package_json": "packages/session-query/session-log-export/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-locale",
+        "devDependencies:@deepseek-ai/dsh-client-store",
+        "devDependencies:@deepseek-ai/dsh-client-ui-commands",
+        "devDependencies:@deepseek-ai/dsh-client-ui-conversation",
+        "devDependencies:@deepseek-ai/dsh-client-ui-layout",
+        "devDependencies:@deepseek-ai/dsh-client-ui-message-feedback",
+        "devDependencies:@deepseek-ai/dsh-client-ui-primitives",
+        "devDependencies:@deepseek-ai/dsh-client-ui-renderer",
+        "devDependencies:@deepseek-ai/dsh-client-ui-session",
+        "devDependencies:@deepseek-ai/dsh-client-ui-slots"
+      ]
+    },
+    {
+      "package_json": "packages/extensions/cordis-client-runner/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-modules",
+        "devDependencies:@deepseek-ai/dsh-client-ui-renderer",
+        "devDependencies:@deepseek-ai/dsh-client-ui-theme"
+      ]
+    },
+    {
+      "package_json": "packages/experimental/webworker-runtime/package.json",
+      "removed_edges": [
+        "dependencies:@deepseek-ai/dsh-client-web",
+        "devDependencies:@deepseek-ai/dsh-client-file-upload",
+        "devDependencies:@deepseek-ai/dsh-client-modules",
+        "peerDependencies:@deepseek-ai/dsh-client-modules"
+      ]
+    },
+    {
+      "package_json": "packages/experimental/session-inspector/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-store",
+        "devDependencies:@deepseek-ai/dsh-client-ui-chat",
+        "devDependencies:@deepseek-ai/dsh-client-ui-primitives",
+        "devDependencies:@deepseek-ai/dsh-client-ui-sidebar-right",
+        "devDependencies:@deepseek-ai/dsh-client-ui-session",
+        "devDependencies:@deepseek-ai/dsh-client-locale",
+        "devDependencies:@deepseek-ai/dsh-client-ui-conversation",
+        "devDependencies:@deepseek-ai/dsh-client-ui-renderer",
+        "devDependencies:@deepseek-ai/dsh-client-ui-slots"
+      ]
+    },
+    {
+      "package_json": "packages/experimental/plugin-recommendations/package.json",
+      "removed_edges": [
+        "dependencies:@deepseek-ai/dsh-client-ui-plugin-recommendations",
+        "dependencies:@deepseek-ai/dsh-client-ui-action-cards"
+      ]
+    },
+    {
+      "package_json": "packages/experimental/personalized-recommendations/package.json",
+      "removed_edges": [
+        "dependencies:@deepseek-ai/dsh-client-ui-action-cards",
+        "dependencies:@deepseek-ai/dsh-client-ui-creation-recommendations",
+        "dependencies:@deepseek-ai/dsh-client-ui-plugin-recommendations"
+      ]
+    },
+    {
+      "package_json": "packages/experimental/inspector/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-ui-renderer",
+        "devDependencies:@deepseek-ai/dsh-client-ui-layout",
+        "devDependencies:@deepseek-ai/dsh-client-shortcuts",
+        "devDependencies:@deepseek-ai/dsh-client-store",
+        "devDependencies:@deepseek-ai/dsh-client-ui-slots",
+        "devDependencies:@deepseek-ai/dsh-client-ui-primitives",
+        "devDependencies:@deepseek-ai/dsh-client-locale",
+        "devDependencies:@deepseek-ai/dsh-client-modules"
+      ]
+    },
+    {
+      "package_json": "packages/experimental/cua/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-locale",
+        "devDependencies:@deepseek-ai/dsh-client-store",
+        "devDependencies:@deepseek-ai/dsh-client-ui-primitives",
+        "devDependencies:@deepseek-ai/dsh-client-ui-renderer",
+        "devDependencies:@deepseek-ai/dsh-client-ui-slots",
+        "devDependencies:@deepseek-ai/dsh-client-ui-plugin-manager",
+        "devDependencies:@deepseek-ai/dsh-client-ui-settings",
+        "devDependencies:@deepseek-ai/dsh-client-ui-layout",
+        "devDependencies:@deepseek-ai/dsh-client-ui-user-questions",
+        "devDependencies:@deepseek-ai/dsh-client-ui-approval",
+        "devDependencies:@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    },
+    {
+      "package_json": "packages/experimental/creation-recommendations/package.json",
+      "removed_edges": [
+        "dependencies:@deepseek-ai/dsh-client-ui-creation-recommendations",
+        "dependencies:@deepseek-ai/dsh-client-ui-action-cards"
+      ]
+    },
+    {
+      "package_json": "packages/experimental/agent-team-profile/package.json",
+      "removed_edges": [
+        "dependencies:@deepseek-ai/dsh-experimental-client-ui-agent-team"
+      ]
+    },
+    {
+      "package_json": "packages/context/harness-dev-context/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-web-app"
+      ]
+    },
+    {
+      "package_json": "packages/client/ui-deepseek-model-label-1017/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-locale",
+        "devDependencies:@deepseek-ai/dsh-client-ui-model-selection",
+        "devDependencies:@deepseek-ai/dsh-client-ui-renderer",
+        "devDependencies:@deepseek-ai/dsh-client-ui-primitives",
+        "devDependencies:@deepseek-ai/dsh-client-ui-slots"
+      ]
+    },
+    {
+      "package_json": "packages/bundle/sdk-app/package.json",
+      "removed_edges": [
+        "dependencies:@deepseek-ai/dsh-client-file-upload"
+      ]
+    },
+    {
+      "package_json": "packages/api/workspace-files/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-resources",
+        "devDependencies:@deepseek-ai/dsh-client-ui-slots"
+      ]
+    },
+    {
+      "package_json": "packages/api/workspace-controller/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-store",
+        "devDependencies:@deepseek-ai/dsh-host-directory-picker",
+        "peerDependencies:@deepseek-ai/dsh-host-directory-picker"
+      ]
+    },
+    {
+      "package_json": "packages/api/terminal-controller/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-store"
+      ]
+    },
+    {
+      "package_json": "packages/api/session-controller/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-file-upload",
+        "devDependencies:@deepseek-ai/dsh-client-store",
+        "peerDependencies:@deepseek-ai/dsh-client-file-upload"
+      ]
+    },
+    {
+      "package_json": "packages/api/remotes/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-file-upload",
+        "devDependencies:@deepseek-ai/dsh-client-ui-plugin-manager",
+        "devDependencies:@deepseek-ai/dsh-client-product-analytics"
+      ]
+    },
+    {
+      "package_json": "packages/api/remote-access/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-ui-renderer",
+        "devDependencies:@deepseek-ai/dsh-client-ui-slots"
+      ]
+    },
+    {
+      "package_json": "packages/api/job-controller/package.json",
+      "removed_edges": [
+        "devDependencies:@deepseek-ai/dsh-client-store"
+      ]
+    },
+    {
+      "package_json": "apps/cli/package.json",
+      "removed_edges": [
+        "dependencies:@deepseek-ai/dsh-agent-tool-presentation",
+        "dependencies:@deepseek-ai/dsh-client-ui-agent-preset",
+        "dependencies:@deepseek-ai/dsh-client-ui-cordis",
+        "dependencies:@deepseek-ai/dsh-web-app",
+        "dependencies:@deepseek-ai/dsh-experimental-voice-input-bundle",
+        "dependencies:@deepseek-ai/dsh-experimental-cot-translation-bundle",
+        "dependencies:@deepseek-ai/dsh-experimental-plugin-market-bundle",
+        "devDependencies:@deepseek-ai/dsh-host-frontend-static"
+      ]
+    }
+  ],
+  "build_surface": {
+    "removed_tsconfig_lines": [
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-entry-customization\": [\"./packages/client/ui-entry-customization/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-entry-customization/client\": [\"./packages/client/ui-entry-customization/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-entry-customization/src/*\": [\"./packages/client/ui-entry-customization/src/*\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-product-analytics\": [\"./packages/client/product-analytics/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-product-analytics/types\": [\"./packages/client/product-analytics/src/events.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-product-analytics/client\": [\"./packages/client/product-analytics/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-account\": [\"./packages/client/ui-settings-account/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-account/client\": [\"./packages/client/ui-settings-account/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-client-ui-cot-translation\": [\"./packages/experimental/client-ui-cot-translation/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-action-cards\": [\"./packages/experimental/client-ui-action-cards/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-action-cards/client\": [\"./packages/experimental/client-ui-action-cards/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-creation-recommendations\": [\"./packages/experimental/client-ui-creation-recommendations/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-creation-recommendations/client\": [\"./packages/experimental/client-ui-creation-recommendations/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-plugin-recommendations\": [\"./packages/experimental/client-ui-plugin-recommendations/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-plugin-recommendations/client\": [\"./packages/experimental/client-ui-plugin-recommendations/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-client-ui-cot-translation/types\": [\"./packages/experimental/client-ui-cot-translation/src/types.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-client-ui-cot-translation/client\": [\"./packages/experimental/client-ui-cot-translation/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-cot-translation-bundle\": [\"./packages/experimental/cot-translation-bundle/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-client-ui-voice-input\": [\"./packages/experimental/client-ui-voice-input/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-voice-input-bundle\": [\"./packages/experimental/voice-input-bundle/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-plugin-market-bundle\": [\"./packages/experimental/plugin-market-bundle/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-client-ui-voice-input/client\": [\"./packages/experimental/client-ui-voice-input/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-client-ui-claude-code-mods\": [\"./packages/experimental/client-ui-claude-code-mods/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-client-ui-claude-code-mods/client\": [\"./packages/experimental/client-ui-claude-code-mods/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-terminal\": [\"./packages/client/ui-sidebar-terminal/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-terminal/client\": [\"./packages/client/ui-sidebar-terminal/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-session/chunk-rows\": [\"./packages/core/session/src/chunk-rows.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-agent-preset-registry/tools\": [\"./packages/preset/agent-preset-registry/src/tools.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-agent/brand\": [\"./packages/core/agent/src/brand.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-web-app/startup\": [\"./packages/bundle/web-app/src/startup.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-directory-picker\": [\"./packages/host/directory-picker/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-directory-picker/*\": [\"./packages/host/directory-picker/src/*\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-directory-picker-browse\": [\"./packages/host/directory-picker-browse/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-directory-picker-browse/*\": [\"./packages/host/directory-picker-browse/src/*\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-directory-picker-native\": [\"./packages/host/directory-picker-native/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-directory-picker-native/*\": [\"./packages/host/directory-picker-native/src/*\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-directory-picker-auto\": [\"./packages/host/directory-picker-auto/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-directory-picker-auto/*\": [\"./packages/host/directory-picker-auto/src/*\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-open-in-app\": [\"./packages/host/open-in-app/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-open-in-app/shared\": [\"./packages/host/open-in-app/src/shared.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-host-frontend-static\": [\"./packages/host/frontend-static/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-slots\": [\"./packages/client/ui-slots/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-file-drag\": [\"./packages/client/ui-file-drag/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-file-drag/client\": [\"./packages/client/ui-file-drag/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-attachment\": [\"./packages/client/ui-attachment/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-primitives\": [\"./packages/client/ui-primitives/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-dockkit\": [\"./packages/client/ui-dockkit/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-right\": [\"./packages/client/ui-sidebar-right/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-right/client\": [\"./packages/client/ui-sidebar-right/src/client\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-documentpreview\": [\"./packages/client/ui-sidebar-documentpreview/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-documentpreview/client\": [\"./packages/client/ui-sidebar-documentpreview/src/client\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-browser\": [\"./packages/client/ui-sidebar-browser/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-browser/client\": [\"./packages/client/ui-sidebar-browser/src/client\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-browser/types\": [\"./packages/client/ui-sidebar-browser/src/types.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-resources\": [\"./packages/client/resources/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-resources/client\": [\"./packages/client/resources/src/client\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-files\": [\"./packages/client/ui-sidebar-files/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar-files/client\": [\"./packages/client/ui-sidebar-files/src/client\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-store\": [\"./packages/client/store/src/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-renderer\": [\"./packages/client/ui-renderer/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-renderer/client\": [\"./packages/client/ui-renderer/src/client\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-session\": [\"./packages/client/ui-session/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-session/client\": [\"./packages/client/ui-session/src/client\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-file-upload\": [\"./packages/client/file-upload/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-file-upload/client\": [\"./packages/client/file-upload/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-file-upload/types\": [\"./packages/client/file-upload/src/types.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-hmr\": [\"./packages/client/hmr/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-modules\": [\"./packages/client/modules/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-cordis\": [\"./packages/extensions/ui-cordis/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-cordis/client\": [\"./packages/extensions/ui-cordis/src/client\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-shortcuts/protocol\": [\"./packages/client/shortcuts/src/protocol.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-shortcuts\": [\"./packages/client/shortcuts/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-shortcuts\": [\"./packages/client/ui-shortcuts/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-layout\": [\"./packages/client/ui-layout/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-sidebar\": [\"./packages/client/ui-sidebar/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-brand-official\": [\"./packages/client/ui-brand-official/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-approval\": [\"./packages/client/ui-approval/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-approval/client\": [\"./packages/client/ui-approval/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-chat\": [\"./packages/client/ui-chat/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-chat/client\": [\"./packages/client/ui-chat/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-conversation\": [\"./packages/client/ui-conversation/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-conversation/client\": [\"./packages/client/ui-conversation/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-tool\": [\"./packages/client/ui-tool/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-deliverables\": [\"./packages/client/ui-deliverables/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-workflow-run\": [\"./packages/client/ui-workflow-run/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-input-trigger\": [\"./packages/client/ui-input-trigger/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-reference\": [\"./packages/client/ui-reference/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-commands\": [\"./packages/client/ui-commands/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-model-selection\": [\"./packages/client/ui-model-selection/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-goal\": [\"./packages/client/ui-goal/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-message-feedback\": [\"./packages/client/ui-message-feedback/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-agent-preset\": [\"./packages/client/ui-agent-preset/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-permission-presets\": [\"./packages/client/ui-permission-presets/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-skill\": [\"./packages/client/ui-skill/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-subagent\": [\"./packages/client/ui-subagent/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-client-ui-agent-team\": [\"./packages/experimental/client-ui-agent-team/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-experimental-client-ui-agent-team/client\": [\"./packages/experimental/client-ui-agent-team/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-plugins\": [\"./packages/client/ui-settings-plugins/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-shell\": [\"./packages/client/ui-settings-shell/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-agent-loop\": [\"./packages/client/ui-settings-agent-loop/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-session-log\": [\"./packages/client/ui-settings-session-log/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-subagent\": [\"./packages/client/ui-settings-subagent/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-web-search\": [\"./packages/client/ui-settings-web-search/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-jobs\": [\"./packages/client/ui-jobs/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-jobs/client\": [\"./packages/client/ui-jobs/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-schedule\": [\"./packages/client/ui-schedule/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-schedule/client\": [\"./packages/client/ui-schedule/src/client/index.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-plan\": [\"./packages/client/ui-plan/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-user-questions\": [\"./packages/client/ui-user-questions/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-trajectory\": [\"./packages/client/ui-trajectory/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-workspace\": [\"./packages/client/ui-workspace/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-theme\": [\"./packages/client/ui-theme/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-theme/brand-font.css\": [\"./packages/client/ui-theme/src/styles/brand-font.css\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings\": [\"./packages/client/ui-settings/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-general\": [\"./packages/client/ui-settings-general/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-general/types\": [\"./packages/client/ui-settings-general/src/types.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-models\": [\"./packages/client/ui-settings-models/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-plugin-manager\": [\"./packages/client/ui-plugin-manager/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-plugin-market\": [\"./packages/client/ui-plugin-market/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-settings-plugin-inventory\": [\"./packages/client/ui-settings-plugin-inventory/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-locale\": [\"./packages/client/locale/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-web/injections\": [\"./packages/client/web/src/apply-injections.ts\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-web\": [\"./packages/client/web/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-directory-picker-browse\": [\"./packages/client/ui-directory-picker-browse/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-directory-picker-native\": [\"./packages/client/ui-directory-picker-native/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-open-in-app\": [\"./packages/client/ui-open-in-app/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-client-ui-secret-mask\": [\"./packages/client/ui-secret-mask/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-agent-tool-presentation\": [\"./packages/core/agent-tool-presentation/src\"],",
+      "tsconfig.base.json: \"@deepseek-ai/dsh-web-app\": [\"./packages/bundle/web-app/src\"],",
+      "tsconfig.host.json: \"apps/web/tests/creation-recommendations.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plugin-recommendations.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/japanese-plugin-metadata.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/additional-locales.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/rich-text-quotes.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/hover-input.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/collapse-timing.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/notice-wake-tail.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/fold-blank-matrix.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/chat-fold-opened-group.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/chat-flow-layout.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/product-isolation.ts\",",
+      "tsconfig.host.json: \"apps/web/katex-fonts.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/connection-recovery.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/server-restart.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/shortcuts.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/shortcuts-desktop.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/shortcuts-workspace.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/shortcuts-panels.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/shortcuts-fixed.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/default-product-isolation.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/diff-context.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/code-card-layout.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/code-language.snapshot.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/scaffold.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/clock.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/voice-input.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/cot-translation.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/cot-translation-paid.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/voice-setup.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/voice-download.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/prefix-proxy.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/developer-tools-settings.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/auto-review-fixture.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/auto-review-approval.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/auto-review-denial.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/scaffold-generation.spec.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/default-model.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/model-menu-observer.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/github-ready-review.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/streaming-fence-highlight.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/declared-reasoning.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/support.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/model-input-layout.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/scaffold-hermetic.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/startup-rpc-budget.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/minimal-preset.snapshot.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/message-feedback-protocol.snapshot.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/preset-migration.snapshot.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/subagent-fork-schedule.snapshot.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/live-interactions.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/question-composer.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/question-ptc.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/approval-composer.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plan-control-row.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plan-review.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/steering.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/navigation-panes.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/shell-command-details.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/terminal-command-browser.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/focus-rings.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/chat-scroll-fixture.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/trajectory-virtualization.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/lifecycle-chrome.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/reasoning-preview.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/details-session-lifecycle.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/sessionless-header.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/document-preview.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/excel-opc.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/office-fixture.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/sidebar-browser.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plugin-config.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/input-plugin-extensions.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plugin-manager.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plugin-sticky-motion.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/entry-customization.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/cua-optin.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/cua-permissions.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/schedule-header.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/schedule-phone.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/worktree-opt-in.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/session-inspector.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/shared-inspector.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/inspector-late-enable.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/layout-bottom.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/devtools-frontend.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/inspector-panels.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/inspector-source-build.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plugin-install-cancel.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plugin-install-approve.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plugin-hmr-lifecycle.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plugin-install-registry.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/plugin-install-github.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/client-plugin-live.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/icon-skin.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/draft-initialization.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/settings-chrome.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/session-log-upload.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/caption-overlays.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/settings-appearance.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/menu-material.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/desktop-locale.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/window-controls.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/settings-import.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/models-settings.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/deepseek-messages-settings.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/deepseek-model-label-1017.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/deepseek-messages-chat.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/models-settings-recovery.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/onboarding-deepseek-config.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/onboarding-native.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/desktop-onboarding.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/bonus-notice.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/account-login.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/onboarding-usable-provider.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/remote-settings.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/public-mount.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/workspace-new-session-folding.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/workspace-management.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/default-workspace.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/new-session-refused.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/workspace-recency.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/session-unarchive.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/session-archive-active.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/replay-round-trip.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/session-replay-reload.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/hmr-live.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/preview-boot.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/seeded-history.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/cold-blank-session.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/blank-writer-reuse.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/blank-preset-reuse.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/stats-paged-history.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/stats-truncated-tooltip.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/sidebar-scrollbar.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/sidebar-title-hover-scroll.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/rail-search-expand.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/conversation-column-overflow.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/ptc-round.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/ptc-escalation.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/standalone-string-editor.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/official-subagent-bundle.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/present.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/present-svg.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/present-after-closing-reply.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/composer-draft-scroll.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/composer-focus.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/composer-placeholder.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/context-meter.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/cordis-tool-round.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/web-search-round.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/file-upload-round.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/message-actions.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/open-in-app-ssh.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/fork-mid-turn.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/message-feedback.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/markdown-images.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/markdown-image-refresh.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/markdown-file-links.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/user-text-secret-mask.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/reference-composer.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/markdown-wide-table.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/thinking-markdown.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/math-rendering.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/markdown-cjk-strong.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/markdown-inline-code-links.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/clickable-links-gallery.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/queue-actions.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/idle-submission-handoff.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/queue-image.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/skill-invocation-policy.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/skill-user-invoke.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/skill-menu-plugin-change.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/permission-policy-context.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/access-confirmation.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/agent-preset-selection.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/agent-preset-authoring.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/shipped-composition.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/goal-bar.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/schedule-after.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/feedback-command.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/feedback-release.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/goal-command-presentation.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/startup-auto-selection.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/changed-files-turn.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/produced-file-mentions.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/subagent-conversation.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/subagent-interrupt.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/subagent-interrupt-ui.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/sidebar-subagent-activity.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/background-job-list.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/jobs-menu-layering.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/live-job-stream.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/bash-abort-row.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/skill-tool-row.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/tool-details.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/turn-tail-actions.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/goal-multi-turn-actions.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/agent-team-panel.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/sidebar-right.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/sidebar-terminal.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/chat-scroll-fixture.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/chat-scroll-contract.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/chat-long-interactions.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/chat-continuous-conversation.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/composer-tab-geometry.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/conversation-view-tabs.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/composer-shortcuts.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/window-drag-coverage.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/complex-history.perf.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/pwsh-terminal.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/tests/workflow-run.e2e.ts\",",
+      "tsconfig.host.json: \"apps/web/stress-tests/reasoning-chunks.stress.ts\",",
+      "tsconfig.host.json: \"apps/plugin-market-generator/tests/**/*.ts\",",
+      "tsconfig.host.json: \"apps/desktop/scripts/**/*.ts\",",
+      "tsconfig.host.json: \"apps/desktop/tests/**/*.ts\",",
+      "tsconfig.host.json: \"apps/desktop/tests/keyboard.spec.ts\",",
+      "tsconfig.host.json: { \"path\": \"./packages/experimental/client-ui-cot-translation/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/experimental/cot-translation-bundle\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/product-analytics/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/experimental/voice-input-bundle\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/experimental/plugin-market-bundle\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/locale/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/ui-theme/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/ui-chat/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/ui-conversation/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/ui-settings/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/ui-settings-general/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/ui-sidebar-documentpreview/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/ui-sidebar-browser/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/ui-settings-general/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/ui-deliverables/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/ui-plugin-manager/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/client/file-upload/tsconfig.host.json\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/core/agent-tool-presentation\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/bundle/web-app\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/host/directory-picker\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/host/directory-picker-auto\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/host/directory-picker-browse\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/host/directory-picker-native\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/host/frontend-static\" },",
+      "tsconfig.host.json: { \"path\": \"./packages/host/open-in-app\" },",
+      "tsconfig.host.json: { \"path\": \"./apps/plugin-market-generator\" },",
+      "tsconfig.host.json: { \"path\": \"./apps/desktop/tsconfig.host.json\" }"
+    ],
+    "removed_root_scripts": [
+      "build:lib:client",
+      "build:web",
+      "build:desktop",
+      "dev:desktop",
+      "start:desktop",
+      "prepare:desktop",
+      "package:desktop",
+      "package:desktop:dir",
+      "package:desktop:mac:arm64",
+      "package:desktop:mac:arm64:unsigned",
+      "package:desktop:mac:arm64:dir",
+      "package:desktop:mac:x64",
+      "package:desktop:mac:x64:unsigned",
+      "package:desktop:mac:x64:dir",
+      "package:desktop:win:x64",
+      "package:desktop:win:x64:unsigned",
+      "package:desktop:win:x64:dir",
+      "upload:mac:arm64",
+      "upload:mac:x64",
+      "upload:win:x64",
+      "upload:latest:mac:arm64",
+      "upload:latest:mac:x64",
+      "upload:latest:win:x64",
+      "test:web",
+      "test:web:refresh",
+      "test:web:built",
+      "test:web:ci",
+      "test:web:perf",
+      "test:web:perf:built",
+      "test:web:stress",
+      "verify-installer-locales",
+      "start:web",
+      "dev:web"
+    ],
+    "deleted_client_aggregate": "tsconfig.client.json"
+  },
+  "verification": {
+    "workspace_package_count": 307,
+    "removed_package_count": 88,
+    "dangling_workspace_dependencies": 0,
+    "kept_badge": "@deepseek-ai/dsh-client-ui-deepseek-model-label-1017",
+    "pending_kept": 20,
+    "apps": [
+      "apps/cli",
+      "apps/desktop-host"
+    ],
+    "bundles": [
+      "packages/bundle/headless",
+      "packages/bundle/base"
+    ]
+  },
+  "notes": [
+    "The retained 1017 badge is kept as instructed; client/Web UI workspace dependencies are pruned from its package.json because the frontend stack is gone.",
+    "Only frontend/client packages and their Web-only bundles are deleted; backend, pending, and transitive packages stay.",
+    "desktop-host remains in the tree but its desktop profile needs the deleted dsh-web-app bundle and browser UI roster; see docs/trimmed-runtime.md."
+  ]
+}

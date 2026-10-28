@@ -1,0 +1,4 @@
+FAIL /home/hatch/workspace/trim-build/packages/typert/registry -> ERR_MODULE_NOT_FOUND
+FAIL /home/hatch/workspace/trim-build/packages/api/gateway -> ERR_MODULE_NOT_FOUND
+OK   /home/hatch/workspace/AEH/.scratch/trim-fix-copy/packages/typert/registry -> TypertRegistry,default,typertEndpoint,typertKey,typertPackageKey
+OK   /home/hatch/workspace/AEH/.scratch/trim-fix-copy/packages/api/gateway -> TypertGatewayError,TypertGatewayService,default

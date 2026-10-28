@@ -1,0 +1,69 @@
+{
+  "run_id": "20261027T152858Z",
+  "status": "passed",
+  "exit_code": 0,
+  "recorded_at_utc": "2026-10-27T15:29:46+00:00",
+  "turn_completed_at_utc": "2026-10-27T15:29:27.521Z",
+  "isolated_dsh_home": "/tmp/trim-smoke/home",
+  "profile": "aeh-e2e",
+  "dsh_entry": "/home/hatch/workspace/trim-build/apps/cli/lib/bin.js",
+  "dsh_version": "0.2.1-rc.3",
+  "cwd": "/home/hatch/workspace/AEH",
+  "task_source": "task.md (sha256 56f1283aab789bfe161ceca841a4894f9cb66c47b626ec2c59d347053e27bba6, identical to the 152341Z copy) via stdin (`--json -`)",
+  "events": 42,
+  "stdout_lines": 42,
+  "session_ids": [
+    "session-9e95afec-8697-4d2c-bf6d-e150475a175f"
+  ],
+  "tool_call_counts": {
+    "aeh_check_curriculum": 1,
+    "aeh_update_hypotheses": 1,
+    "aeh_select_probe": 1,
+    "aeh_schedule_review": 1,
+    "aeh_prepare_intervention": 1,
+    "aeh_generate_report": 1
+  },
+  "tool_result_counts": {
+    "aeh_check_curriculum": 1,
+    "aeh_update_hypotheses": 1,
+    "aeh_select_probe": 1,
+    "aeh_schedule_review": 1,
+    "aeh_prepare_intervention": 1,
+    "aeh_generate_report": 1
+  },
+  "tool_call_order": [
+    "aeh_check_curriculum",
+    "aeh_update_hypotheses",
+    "aeh_select_probe",
+    "aeh_schedule_review",
+    "aeh_prepare_intervention",
+    "aeh_generate_report"
+  ],
+  "tool_calls_total": 6,
+  "tool_results_total": 6,
+  "tool_results_completed": 6,
+  "all_six_called": true,
+  "each_called_exactly_once": true,
+  "order_matches_required": true,
+  "error_events": 0,
+  "final_reason": "completed",
+  "final_text": "All six synthetic AEH stages (A curriculum gate, B hypothesis spawn, C probe selection, D review scheduling, E intervention preparation, F report generation) completed in order.",
+  "boot_warnings": [
+    "typert (@deepseek-ai/dsh-typert-registry): failed to import: Cannot find module .../packages/bundle/base/node_modules/@deepseek-ai/dsh-typert-registry/lib/index.js",
+    "typert-gateway (@deepseek-ai/dsh-api-gateway): failed to import: Cannot find module .../packages/bundle/base/node_modules/@deepseek-ai/dsh-api-gateway/lib/index.js",
+    "dsh: warning: 3 entries did not activate"
+  ],
+  "native_addon_present": "/home/hatch/workspace/trim-build/native/system/packages/linux-x64/bin/glibc/system.node",
+  "no_fallback_used": true,
+  "running_harness_touched": false,
+  "trim_build_modified": false,
+  "source_clone_modified": false,
+  "step18_runtime_modified": false,
+  "notes": [
+    "All six calls were issued sequentially, one per model step, preserving required order.",
+    "All six tool results have status \"completed\"; no error events in stdout.",
+    "Stage F report totals are zero because its synthetic event consentScope (report:aggregate) was not in the report's authorized scopes; the tool call itself ran and returned a report.",
+    "Boot warnings about absent typert-registry/api-gateway libs are non-fatal and did not block tool calls.",
+    "Only this evidence directory was written under the AEH workspace, plus the existing isolated /tmp/trim-smoke/home session storage."
+  ]
+}

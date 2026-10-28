@@ -1,0 +1,29 @@
+ℹ tsdown v0.22.2 powered by rolldown v1.1.1
+ℹ config file: /home/hatch/workspace/AEH/.scratch/asset-probe/tsdown.config.ts 
+ℹ [@synthetic/asset-probe] entry: lib/types/index.js
+ℹ [@synthetic/asset-probe] target: es2024
+ℹ [@synthetic/asset-probe/client] entry: lib/types/client/index.js
+ℹ Build start
+ℹ [@synthetic/asset-probe] [ESM] lib/index.js  0.08 kB │ gzip: 0.09 kB
+ℹ [@synthetic/asset-probe] [ESM] 1 files, total: 0.08 kB
+✔ [@synthetic/asset-probe] Build complete in 67ms
+
+ ERROR  Error: Build failed with 1 error:
+
+[plugin dsh-package-asset]
+Error: tsdown: @synthetic/asset-probe: /home/hatch/workspace/AEH/.scratch/asset-probe/src/client/assets/foo.svg needs package.json exports {"./assets/*":"./lib/assets/*"} and "lib/assets" in files
+    at reference (file:///home/hatch/workspace/trim-build/packages/client/tsdown.client.ts?no-cache=4836b5e3-b8c7-4a7f-9eec-801cb0ee86e5:659:13)
+    at LoadPluginContextImpl.load (file:///home/hatch/workspace/trim-build/packages/client/tsdown.client.ts?no-cache=4836b5e3-b8c7-4a7f-9eec-801cb0ee86e5:686:51)
+    at plugin (file:///home/hatch/workspace/trim-build/node_modules/.pnpm/rolldown@1.1.1/node_modules/rolldown/dist/shared/bindingify-input-options-B7_WBoOp.mjs:1221:30)
+    at plugin.<computed> (file:///home/hatch/workspace/trim-build/node_modules/.pnpm/rolldown@1.1.1/node_modules/rolldown/dist/shared/bindingify-input-options-B7_WBoOp.mjs:1633:18)
+    at aggregateBindingErrorsIntoJsError (file:///home/hatch/workspace/trim-build/node_modules/.pnpm/rolldown@1.1.1/node_modules/rolldown/dist/shared/error-C0TrL0_H.mjs:48:18)
+    at unwrapBindingResult (file:///home/hatch/workspace/trim-build/node_modules/.pnpm/rolldown@1.1.1/node_modules/rolldown/dist/shared/error-C0TrL0_H.mjs:18:128)
+    at #build (file:///home/hatch/workspace/trim-build/node_modules/.pnpm/rolldown@1.1.1/node_modules/rolldown/dist/shared/rolldown-build-abS241_6.mjs:3288:34)
+    at async build (file:///home/hatch/workspace/trim-build/node_modules/.pnpm/rolldown@1.1.1/node_modules/rolldown/dist/index.mjs:42:22)
+    at async Promise.all (index 0)
+    at async buildSingle (file:///home/hatch/workspace/trim-build/node_modules/.pnpm/tsdown@0.22.2_oxc-resolver@11.20.0_publint@0.3.24_tsx@4.23.13_typescript@6.0.3/node_modules/tsdown/dist/build-BxT2lm9L.mjs:791:19)
+    at async Promise.all (index 1)
+    at async buildWithConfigs (file:///home/hatch/workspace/trim-build/node_modules/.pnpm/tsdown@0.22.2_oxc-resolver@11.20.0_publint@0.3.24_tsx@4.23.13_typescript@6.0.3/node_modules/tsdown/dist/build-BxT2lm9L.mjs:747:18)
+    at async CAC.<anonymous> (file:///home/hatch/workspace/trim-build/node_modules/.pnpm/tsdown@0.22.2_oxc-resolver@11.20.0_publint@0.3.24_tsx@4.23.13_typescript@6.0.3/node_modules/tsdown/dist/run.mjs:21:2)
+    at async runCLI (file:///home/hatch/workspace/trim-build/node_modules/.pnpm/tsdown@0.22.2_oxc-resolver@11.20.0_publint@0.3.24_tsx@4.23.13_typescript@6.0.3/node_modules/tsdown/dist/run.mjs:45:3)
+

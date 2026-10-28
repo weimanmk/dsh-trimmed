@@ -1,0 +1,24 @@
+ℹ tsdown v0.22.2 powered by rolldown v1.1.1
+ℹ config file: /home/hatch/workspace/AEH/.scratch/trim-client-test/packages/extensions/cordis-client-runner/tsdown.config.ts 
+ℹ [@deepseek-ai/dsh-cordis-client-runner] entry: lib/types/index.js
+ℹ [@deepseek-ai/dsh-cordis-client-runner] target: es2024
+ℹ [@deepseek-ai/dsh-cordis-client-runner] tsconfig: tsconfig.json
+ℹ [@deepseek-ai/dsh-cordis-client-runner/client] entry: lib/types/client/index.js
+ℹ [@deepseek-ai/dsh-cordis-client-runner/client] tsconfig: tsconfig.json
+ℹ Build start
+
+ ERROR  Error: Build failed with 1 error:
+
+[31m[UNRESOLVED_ENTRY] [0mCannot resolve entry module lib/types/index.js.
+
+    at aggregateBindingErrorsIntoJsError (file:///home/hatch/workspace/AEH/.scratch/trim-client-test/node_modules/.pnpm/rolldown@1.1.1/node_modules/rolldown/dist/shared/error-C0TrL0_H.mjs:48:18)
+    at unwrapBindingResult (file:///home/hatch/workspace/AEH/.scratch/trim-client-test/node_modules/.pnpm/rolldown@1.1.1/node_modules/rolldown/dist/shared/error-C0TrL0_H.mjs:18:128)
+    at #build (file:///home/hatch/workspace/AEH/.scratch/trim-client-test/node_modules/.pnpm/rolldown@1.1.1/node_modules/rolldown/dist/shared/rolldown-build-abS241_6.mjs:3288:34)
+    at async build (file:///home/hatch/workspace/AEH/.scratch/trim-client-test/node_modules/.pnpm/rolldown@1.1.1/node_modules/rolldown/dist/index.mjs:42:22)
+    at async Promise.all (index 0)
+    at async buildSingle (file:///home/hatch/workspace/AEH/.scratch/trim-client-test/node_modules/.pnpm/tsdown@0.22.2_oxc-resolver@11.20.0_publint@0.3.24_tsx@4.23.13_typescript@6.0.3/node_modules/tsdown/dist/build-BxT2lm9L.mjs:791:19)
+    at async Promise.all (index 0)
+    at async buildWithConfigs (file:///home/hatch/workspace/AEH/.scratch/trim-client-test/node_modules/.pnpm/tsdown@0.22.2_oxc-resolver@11.20.0_publint@0.3.24_tsx@4.23.13_typescript@6.0.3/node_modules/tsdown/dist/build-BxT2lm9L.mjs:747:18)
+    at async CAC.<anonymous> (file:///home/hatch/workspace/AEH/.scratch/trim-client-test/node_modules/.pnpm/tsdown@0.22.2_oxc-resolver@11.20.0_publint@0.3.24_tsx@4.23.13_typescript@6.0.3/node_modules/tsdown/dist/run.mjs:21:2)
+    at async runCLI (file:///home/hatch/workspace/AEH/.scratch/trim-client-test/node_modules/.pnpm/tsdown@0.22.2_oxc-resolver@11.20.0_publint@0.3.24_tsx@4.23.13_typescript@6.0.3/node_modules/tsdown/dist/run.mjs:45:3)
+

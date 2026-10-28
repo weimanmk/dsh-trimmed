@@ -1,0 +1,15 @@
+file:///home/hatch/workspace/trim-build/packages/core/tools/lib/index.js:632
+		if (executor === void 0) throw new ToolExecutorUnavailableError();
+		                               ^
+
+ToolExecutorUnavailableError: The selected tool executor is unavailable. Load an executor in this composition before running the agent.
+    at Proxy.selectExecutor (file:///home/hatch/workspace/trim-build/packages/core/tools/lib/index.js:632:34)
+    at Object.apply (file:///home/hatch/workspace/trim-build/vendor/cordis/lib/index.js:120:36)
+    at Proxy.execute (file:///home/hatch/workspace/trim-build/packages/core/tools/lib/index.js:642:15)
+    at Object.apply (file:///home/hatch/workspace/trim-build/vendor/cordis/lib/index.js:120:36)
+    at invoke (file:///tmp/aeh-loader-trim-build-20261028T005943Z/scripts/loader-evidence.mjs:114:14)
+    at file:///tmp/aeh-loader-trim-build-20261028T005943Z/scripts/loader-evidence.mjs:116:23 {
+  code: 'TOOL_EXECUTOR_UNAVAILABLE'
+}
+
+Node.js v24.22.1

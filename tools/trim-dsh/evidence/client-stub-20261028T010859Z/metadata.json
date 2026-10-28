@@ -1,0 +1,12 @@
+{
+  "timestamp": "20261028T010859Z",
+  "trim_build": "/home/hatch/workspace/trim-build",
+  "trim_build_modified": false,
+  "isolated_copy": "/home/hatch/workspace/AEH/.scratch/trim-client-test",
+  "synthetic_probe": "/home/hatch/workspace/AEH/.scratch/asset-probe",
+  "deleted_frontend_packages_absent": ["packages/client/modules", "packages/client/web", "packages/client/runtime"],
+  "client_browser_js_produced": 0,
+  "root_client_face_exit": 1,
+  "asset_probe_exit": 1,
+  "conclusion": "real client bundling fails loud with no client artifact; the failure is due to missing client-side compile outputs and deleted frontend packages, not the inlined stub; the packageAssets() guard itself does throw"
+}

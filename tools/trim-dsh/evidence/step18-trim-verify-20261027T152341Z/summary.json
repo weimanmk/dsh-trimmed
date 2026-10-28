@@ -1,0 +1,69 @@
+{
+  "run_id": "20261027T152341Z",
+  "status": "failed",
+  "exit_code": 1,
+  "recorded_at_utc": "2026-10-27T15:24:51+00:00",
+  "isolated_dsh_home": "/tmp/trim-smoke/home",
+  "profile": "aeh-e2e",
+  "dsh_entry": "/home/hatch/workspace/trim-build/apps/cli/lib/bin.js",
+  "dsh_version": "0.2.1-rc.3",
+  "cwd": "/home/hatch/workspace/AEH",
+  "task_source": "task.md via stdin (`--json -`)",
+  "events": 4,
+  "stdout_lines": 4,
+  "session_ids": [
+    "session-fd6f28c1-45fe-4b72-82cb-a31a3eff7d12"
+  ],
+  "tool_call_counts": {
+    "aeh_check_curriculum": 0,
+    "aeh_update_hypotheses": 0,
+    "aeh_select_probe": 0,
+    "aeh_schedule_review": 0,
+    "aeh_prepare_intervention": 0,
+    "aeh_generate_report": 0
+  },
+  "tool_result_counts": {
+    "aeh_check_curriculum": 0,
+    "aeh_update_hypotheses": 0,
+    "aeh_select_probe": 0,
+    "aeh_schedule_review": 0,
+    "aeh_prepare_intervention": 0,
+    "aeh_generate_report": 0
+  },
+  "tool_calls_total": 0,
+  "tool_results_total": 0,
+  "all_six_called": false,
+  "each_called_exactly_once": false,
+  "error_events": 1,
+  "errors": [
+    "Cannot find module '/home/hatch/workspace/trim-build/native/system/packages/linux-x64/bin/glibc/system.node'\nRequire stack:\n- /home/hatch/workspace/trim-build/native/system/packages/entry/lib/flock.js"
+  ],
+  "failure_stage": "dsh session persistence startup, before any model/tool call",
+  "failure_cause": "trim-build is missing the native system flock addon at native/system/packages/linux-x64/bin/glibc/system.node; dsh also warns that typert-registry and api-gateway lib/index.js are absent from the trim build.",
+  "notes": [
+    "No tool call was issued; all six call counts are zero.",
+    "No fallback to the running harness, npx dsh, or step18/runtime was used.",
+    "Only this evidence directory was written under the AEH workspace."
+  ],
+  "status_error_events": 1,
+  "error_messages": [
+    "Cannot find module '/home/hatch/workspace/trim-build/native/system/packages/linux-x64/bin/glibc/system.node'\nRequire stack:\n- /home/hatch/workspace/trim-build/native/system/packages/entry/lib/flock.js"
+  ],
+  "native_addon_expected": "/home/hatch/workspace/trim-build/native/system/packages/linux-x64/bin/glibc/system.node",
+  "native_addon_exists": false,
+  "boot_warnings": [
+    "typert (@deepseek-ai/dsh-typert-registry): failed to import: Cannot find module .../packages/bundle/base/node_modules/@deepseek-ai/dsh-typert-registry/lib/index.js",
+    "typert-gateway (@deepseek-ai/dsh-api-gateway): failed to import: Cannot find module .../packages/bundle/base/node_modules/@deepseek-ai/dsh-api-gateway/lib/index.js",
+    "dsh: warning: 3 entries did not activate"
+  ],
+  "no_fallback_used": true,
+  "running_harness_touched": false,
+  "trim_build_modified": false,
+  "source_clone_modified": false,
+  "step18_runtime_modified": false,
+  "isolated_home_artifacts": [
+    "sessions/--home-hatch-workspace-AEH--/session-fd6f28c1-...",
+    "storages/",
+    ".anonymous-user-id"
+  ]
+}

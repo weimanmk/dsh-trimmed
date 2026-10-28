@@ -1,0 +1,169 @@
+{
+  "events": 32,
+  "tool_calls": [
+    {
+      "tool": "aeh_check_curriculum",
+      "callId": "call_00_cwb1od2ivsrb5ua639r8m4j2",
+      "input": {
+        "mode": "learn",
+        "itemId": "item.fraction.add.001",
+        "studentRef": "synthetic.student.step18"
+      }
+    },
+    {
+      "tool": "aeh_check_curriculum",
+      "callId": "call_01_5iwncndtp1l1jrpak281c3s4",
+      "input": {
+        "mode": "learn",
+        "itemId": "item.fraction.multiply.001",
+        "studentRef": "synthetic.student.step18"
+      }
+    },
+    {
+      "tool": "aeh_update_hypotheses",
+      "callId": "call_00_tq3kycn365slnvo4uxwmi2di",
+      "input": {
+        "operation": "spawn",
+        "state": {
+          "hypotheses": [],
+          "unknownWeight": 0.5
+        },
+        "hypothesis": {
+          "hypothesisId": "hyp.adds_ok",
+          "predictedObservableBehaviors": {
+            "item.fraction.equiv.001": 0.8,
+            "item.fraction.compare.001": 0.3
+          },
+          "knowledgeAssumptions": {
+            "kc.fraction.equiv": "understood"
+          },
+          "weight": 0.5
+        }
+      }
+    },
+    {
+      "tool": "aeh_select_probe",
+      "callId": "call_01_cj0qwct9gr058mxfyv7bfilh",
+      "input": {
+        "mode": "learn",
+        "studentRef": "synthetic.student.step18",
+        "weights": {
+          "hyp.adds_ok": 0.5,
+          "unknown": 0.5
+        },
+        "candidates": [
+          {
+            "itemId": "item.fraction.equiv.001",
+            "predictions": {
+              "hyp.adds_ok": 0.8
+            },
+            "timeMinutes": 3,
+            "risk": 0.1,
+            "cognitiveLoad": 0.25,
+            "teachingValue": 0.5
+          },
+          {
+            "itemId": "item.fraction.compare.001",
+            "predictions": {
+              "hyp.adds_ok": 0.3
+            },
+            "timeMinutes": 4,
+            "risk": 0.2,
+            "cognitiveLoad": 0.3,
+            "teachingValue": 0.4
+          }
+        ]
+      }
+    },
+    {
+      "tool": "aeh_schedule_review",
+      "callId": "call_00_ryip3372vcp7m1rn5rxal6mc",
+      "input": {
+        "state": {
+          "learnerRef": "synthetic.student.step18",
+          "memoryUnitId": "kc.fraction.add",
+          "stabilityDays": 2,
+          "difficulty": 5,
+          "observationCount": 3,
+          "independentSuccessCount": 2,
+          "modelFamily": "aeh.fsrs.illustrative",
+          "modelVersion": "v1"
+        },
+        "observations": [
+          {
+            "observationId": "obs.step18.1",
+            "success": true,
+            "independent": true,
+            "kind": "attempt",
+            "occurredAt": "2026-03-02T09:00:00Z"
+          }
+        ],
+        "targetRetention": 0.9
+      }
+    },
+    {
+      "tool": "aeh_generate_report",
+      "callId": "call_01_wykaow3yqzw9e9uj1p4qgzu9",
+      "input": {
+        "audience": "teacher",
+        "studentRef": "synthetic.student.step18",
+        "windowStart": "2026-03-01T00:00:00Z",
+        "windowEnd": "2026-03-08T00:00:00Z",
+        "events": [
+          {
+            "aggregateRef": "agg.step18.1",
+            "studentRef": "synthetic.student.step18",
+            "occurredAt": "2026-03-02T09:00:00Z",
+            "kind": "attempt_aggregate",
+            "consentScope": "educational_report",
+            "kcId": "kc.fraction.add",
+            "attempts": 4,
+            "independentCorrect": 3,
+            "hintsRequested": 1,
+            "minutes": 10
+          }
+        ]
+      }
+    }
+  ],
+  "tool_results": [
+    {
+      "callId": "call_00_cwb1od2ivsrb5ua639r8m4j2",
+      "status": "completed",
+      "result": "{\n  \"allowed\": true,\n  \"reasons\": [],\n  \"allowedKcs\": [\n    \"kc.fraction.add\",\n    \"kc.fraction.compare\",\n    \"kc.fraction.equiv\",\n    \"kc.place.value\"\n  ],\n  \"itemId\": \"item.fraction.add.001\",\n  \"mode\": \"learn\",\n  \"policy\": \"aeh.curriculum_gate.v1\"\n}"
+    },
+    {
+      "callId": "call_01_5iwncndtp1l1jrpak281c3s4",
+      "status": "completed",
+      "result": "{\n  \"allowed\": false,\n  \"reasons\": [\n    \"kcs_not_allowed:kc.fraction.multiply\"\n  ],\n  \"allowedKcs\": [\n    \"kc.fraction.add\",\n    \"kc.fraction.compare\",\n    \"kc.fraction.equiv\",\n    \"kc.place.value\"\n  ],\n  \"itemId\": \"item.fraction.multiply.001\",\n  \"mode\": \"learn\",\n  \"policy\": \"aeh.curriculum_gate.v1\"\n}"
+    },
+    {
+      "callId": "call_00_tq3kycn365slnvo4uxwmi2di",
+      "status": "completed",
+      "result": "{\n  \"state\": {\n    \"hypotheses\": [\n      {\n        \"hypothesisId\": \"hyp.adds_ok\",\n        \"subjectScope\": [],\n        \"knowledgeAssumptions\": {\n          \"kc.fraction.equiv\": \"understood\"\n        },\n        \"strategyPolicy\": [],\n        \"bugRules\": [],\n        \"predictedObservableBehaviors\": {\n          \"item.fraction.equiv.001\": 0.8,\n          \"item.fraction.compare.001\": 0.3\n        },\n        \"responseToIntervention\": [],\n        \"weight\": 1,\n        \"evidenceRefs\": [],\n        \"uncertainty\": \"high\",\n        \"status\": \"active\",\n        \"parentId\": null,\n        \"mergedFrom\": []\n      }\n    ],\n    \"unknownWeight\": 0\n  },\n  \"weights\": {\n    \"hyp.adds_ok\": 1,\n    \"unknown\": 0\n  },\n  \"dominantId\": \"hyp.adds_ok\",\n  \"transitions\": 1,\n  \"snapshotRef\": \"hyp_1\",\n  \"snapshotExpiresAt\": \"2026-10-27T13:38:43.193Z\",\n  \"snapshotTtlMs\": 900000,\n  \"snapshotScope\": {\n    \"sessionScoped\": true,\n    \"agentScoped\": true\n  }\n}"
+    },
+    {
+      "callId": "call_01_cj0qwct9gr058mxfyv7bfilh",
+      "status": "completed",
+      "result": "{\n  \"selection\": {\n    \"itemId\": \"item.fraction.equiv.001\",\n    \"score\": -0.2953027976057393,\n    \"informationGain\": 0.07310400793180982,\n    \"teachingValue\": 0.5,\n    \"timePenalty\": 3,\n    \"riskPenalty\": 0.1,\n    \"loadPenalty\": 0.25,\n    \"answerUncertainty\": 0.934068055375491,\n    \"reasons\": [],\n    \"candidate\": {\n      \"itemId\": \"item.fraction.equiv.001\",\n      \"predictions\": {\n        \"hyp.adds_ok\": 0.8\n      },\n      \"timeMinutes\": 3,\n      \"risk\": 0.1,\n      \"cognitiveLoad\": 0.25,\n      \"teachingValue\": 0.5,\n      \"gateAllowed\": true,\n      \"requiredKcs\": [\n        \"kc.fraction.equiv\"\n      ],\n      \"gateReasons\": []\n    }\n  },\n  \"rejected\": [],\n  \"skipped\": false\n}"
+    },
+    {
+      "callId": "call_00_ryip3372vcp7m1rn5rxal6mc",
+      "status": "completed",
+      "result": "{\n  \"state\": {\n    \"learnerRef\": \"synthetic.student.step18\",\n    \"memoryUnitId\": \"kc.fraction.add\",\n    \"modelFamily\": \"aeh.fsrs.illustrative\",\n    \"modelVersion\": \"v1\",\n    \"stabilityDays\": 3.2,\n    \"difficultyState\": 4.8,\n    \"observationCount\": 4,\n    \"independentSuccessCount\": 3,\n    \"uncertainty\": \"medium\",\n    \"targetRetention\": 0.9,\n    \"nextIntervalDays\": 3.2,\n    \"expectedRetrievabilityAtNextReview\": 0.9\n  },\n  \"nextIntervalDays\": 3.2,\n  \"targetRetention\": 0.9,\n  \"observationsReceived\": 1,\n  \"independentSuccesses\": 1,\n  \"ignoredReadingObservations\": 0,\n  \"modelVersion\": \"v1\"\n}"
+    },
+    {
+      "callId": "call_01_wykaow3yqzw9e9uj1p4qgzu9",
+      "status": "completed",
+      "result": "{\n  \"report_type\": \"teacher_learning_report\",\n  \"audience\": \"teacher\",\n  \"student_ref\": \"synthetic.student.step18\",\n  \"window\": {\n    \"start\": \"2026-03-01T00:00:00Z\",\n    \"end\": \"2026-03-08T00:00:00Z\",\n    \"boundary\": \"start_inclusive_end_exclusive\"\n  },\n  \"generated_at\": \"2026-10-27T13:23:48.610Z\",\n  \"data_minimization\": {\n    \"authorized_aggregate_events_only\": true,\n    \"raw_student_data_included\": false,\n    \"event_refs_included\": false,\n    \"source_events_used\": 1,\n    \"source_events_excluded\": 0,\n    \"authorized_scopes\": [\n      \"educational_report\",\n      \"teacher_report\"\n    ]\n  },\n  \"totals\": {\n    \"attempts\": 4,\n    \"independent_correct\": 3,\n    \"hinted_correct\": 0,\n    \"hints_requested\": 1,\n    \"reviews_due\": 0,\n    \"reviews_completed\": 0,\n    \"minutes\": 10,\n    \"independent_accuracy\": 0.75,\n    \"hints_per_attempt\": 0.25,\n    \"review_completion_rate\": null\n  },\n  \"topics\": [\n    {\n      \"kc_id\": \"kc.fraction.add\",\n      \"attempts\": 4,\n      \"independent_correct\": 3,\n      \"hinted_correct\": 0,\n      \"hints_requested\": 1,\n      \"reviews_due\": 0,\n      \"reviews_completed\": 0,\n      \"minutes\": 10,\n      \"independent_accuracy\": 0.75,\n      \"hints_per_attempt\": 0.25,\n      \"review_completion_rate\": null,\n      \"attention_reasons\": []\n    }\n  ],\n  \"attention_topics\": []\n}"
+    }
+  ],
+  "texts": [
+    "I'll execute the stages in order, starting with Stage A.",
+    "Stage A: `item.fraction.add.001` allowed; `item.fraction.multiply.001` refused (`kcs_not_allowed:kc.fraction.multiply`). Now Stage B.",
+    "Stage C and D are independent; executing both now.",
+    "Session complete — all four stages executed in order; no further tool calls.\n\n**Final summary**\n\n| Stage | Result |\n|---|---|\n| A1 gate `item.fraction.add.001` | **allowed = true** (no reasons; mode learn) |\n| A2 gate `item.fraction.multiply.001` | **allowed = false** — fail-closed refusal `kcs_not_allowed:kc.fraction.multiply` |\n| B1 hypotheses | `hyp.adds_ok` spawned, normalised to weight 1.0, unknown 0.0; dominant hypothesis `hyp.adds_ok`; snapshot `hyp_1` |\n| B2 probe | **item.fraction.equiv.001** selected (score −0.2953; info gain 0.0731; gateAllowed true; required KC `kc.fraction.equiv`) |\n| C1 review | **nextIntervalDays = 3.2**, target retention 0.9, stability 3.2 d, difficulty 4.8, retrievability at next review 0.9 |\n| D1 report | **attempts = 4**, independent correct = 3, hints = 1, minutes = 10; independent accuracy 0.75; 1 authorised aggregate event used, 0 excluded; topic `kc.fraction.add` |\n\n**Summary answers:** Gate decisions — add allowed, multiply refused. Selected probe — `item.fraction.equiv.001`. Review interval — 3.2 days. Report attempt total — 4 attempts (3 independent correct, 1 hint, 10 minutes)."
+  ],
+  "final": "Session complete — all four stages executed in order; no further tool calls.\n\n**Final summary**\n\n| Stage | Result |\n|---|---|\n| A1 gate `item.fraction.add.001` | **allowed = true** (no reasons; mode learn) |\n| A2 gate `item.fraction.multiply.001` | **allowed = false** — fail-closed refusal `kcs_not_allowed:kc.fraction.multiply` |\n| B1 hypotheses | `hyp.adds_ok` spawned, normalised to weight 1.0, unknown 0.0; dominant hypothesis `hyp.adds_ok`; snapshot `hyp_1` |\n| B2 probe | **item.fraction.equiv.001** selected (score −0.2953; info gain 0.0731; gateAllowed true; required KC `kc.fraction.equiv`) |\n| C1 review | **nextIntervalDays = 3.2**, target retention 0.9, stability 3.2 d, difficulty 4.8, retrievability at next review 0.9 |\n| D1 report | **attempts = 4**, independent correct = 3, hints = 1, minutes = 10; independent accuracy 0.75; 1 authorised aggregate event used, 0 excluded; topic `kc.fraction.add` |\n\n**Summary answers:** Gate decisions — add allowed, multiply refused. Selected probe — `item.fraction.equiv.001`. Review interval — 3.2 days. Report attempt total — 4 attempts (3 independent correct, 1 hint, 10 minutes).",
+  "errors": []
+}

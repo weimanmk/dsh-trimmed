@@ -1,0 +1,13 @@
+
+> aeh-frontend-demo@0.1.0 build
+> tsc --noEmit && vite build
+
+vite v5.4.21 building for production...
+transforming...
+✓ 44 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.51 kB │ gzip:  0.44 kB
+dist/assets/index-DKrtf8Sg.css   15.82 kB │ gzip:  3.71 kB
+dist/assets/index-CbXtJEC7.js   282.60 kB │ gzip: 96.95 kB
+✓ built in 2.05s

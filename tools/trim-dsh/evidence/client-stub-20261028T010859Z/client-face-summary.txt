@@ -1,0 +1,6 @@
+packages/extensions/cordis-client-runner exit=1
+packages/client/ui-deepseek-model-label-1017 exit=1
+packages/client/connection exit=1
+packages/client/file-upload exit=1
+root client face exit=1
+asset-probe exit=1

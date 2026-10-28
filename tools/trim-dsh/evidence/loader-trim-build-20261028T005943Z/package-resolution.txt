@@ -1,0 +1,46 @@
+{
+  "@deepseek-ai/cordis": {
+    "resolved": "/home/hatch/workspace/trim-build/vendor/cordis/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/vendor/cordis/package.json"
+  },
+  "@deepseek-ai/cordis-plugin-loader": {
+    "resolved": "/home/hatch/workspace/trim-build/vendor/loader/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/vendor/loader/package.json"
+  },
+  "@deepseek-ai/schemastery": {
+    "resolved": "/home/hatch/workspace/trim-build/vendor/schemastery/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/vendor/schemastery/package.json"
+  },
+  "@deepseek-ai/dsh-system-prompt": {
+    "resolved": "/home/hatch/workspace/trim-build/packages/core/system-prompt/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/packages/core/system-prompt/package.json"
+  },
+  "@deepseek-ai/dsh-tools": {
+    "resolved": "/home/hatch/workspace/trim-build/packages/core/tools/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/packages/core/tools/package.json"
+  },
+  "@deepseek-ai/dsh-llm": {
+    "resolved": "/home/hatch/workspace/trim-build/packages/llm/llm/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/packages/llm/llm/package.json"
+  },
+  "@deepseek-ai/dsh-util-values": {
+    "resolved": "/home/hatch/workspace/trim-build/packages/util/values/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/packages/util/values/package.json"
+  },
+  "@deepseek-ai/dsh-tool-call-timeout-policy": {
+    "resolved": "/home/hatch/workspace/trim-build/packages/guard/timeout-policy/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/packages/guard/timeout-policy/package.json"
+  },
+  "@deepseek-ai/dsh-tool-executor-native": {
+    "resolved": "/home/hatch/workspace/trim-build/packages/core/tool-executor-native/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/packages/core/tool-executor-native/package.json"
+  },
+  "@deepseek-ai/dsh-tool-testkit": {
+    "resolved": "/home/hatch/workspace/trim-build/packages/test-support/tool-testkit/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/packages/test-support/tool-testkit/package.json"
+  },
+  "zod": {
+    "resolved": "/home/hatch/workspace/trim-build/node_modules/.pnpm/zod@4.4.3/node_modules/zod/package.json",
+    "realpath": "/home/hatch/workspace/trim-build/node_modules/.pnpm/zod@4.4.3/node_modules/zod/package.json"
+  }
+}

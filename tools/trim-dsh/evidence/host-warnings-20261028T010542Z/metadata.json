@@ -1,0 +1,24 @@
+{
+  "investigation": "trim-build startup warning: 3 entries did not activate",
+  "timestamp": "20261028T010542Z",
+  "trim_build": "/home/hatch/workspace/trim-build",
+  "trim_build_modified": false,
+  "trim_build_config_mtime_utc": {
+    "packages/typert/registry/tsdown.config.ts": "2026-10-27T03:14:56Z",
+    "packages/api/gateway/tsdown.config.ts": "2026-10-27T03:14:53Z"
+  },
+  "trim_build_hostphase_count": 0,
+  "trim_build_lib_index_present": {
+    "packages/typert/registry": false,
+    "packages/api/gateway": false
+  },
+  "isolated_copy": "/home/hatch/workspace/AEH/.scratch/trim-fix-copy",
+  "copy_method": "cp -al (hard links); edited files unlinked before rewrite",
+  "fix": "hostPhase: true in clientBundle() for dsh-typert-registry and dsh-api-gateway",
+  "fix_implemented_in": "tools/trim-dsh/repair-build.py step 7",
+  "produced": {
+    "packages/api/gateway/lib/index.js": {"bytes": 75065, "sha256": "c4a5664d6278920531179b5fb230c9734c9c993849540e5fd6d4279dbd5e66e0"},
+    "packages/typert/registry/lib/index.js": {"bytes": 24449, "sha256": "03371d2381c56785ef0885810dd427820cc11b66b436025095f83f8a76c631ed"}
+  },
+  "headless_impact": "none observed; Step 18 synthetic session exit 0 with warning present"
+}

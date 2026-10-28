@@ -1,0 +1,15 @@
+AEH Step 4+5+8 isolated Cordis/dsh loader evidence
+- node: v24.22.1
+- @deepseek-ai/cordis: 4.0.5
+- @deepseek-ai/dsh-tools: 0.2.1-rc.3
+- @deepseek-ai/cordis-plugin-loader: 1.0.6
+- loader entry: 7386af22
+- mounted tools: aeh_check_curriculum, aeh_generate_report, aeh_prepare_intervention, aeh_schedule_review, aeh_select_probe, aeh_update_hypotheses
+- authorised gate decision: {"allowed":true,"reasons":[],"allowedKcs":["kc.fraction.add","kc.fraction.equiv","kc.place.value"],"itemId":"item.fraction.add.001","mode":"learn","policy":"aeh.curriculum_gate.v1"}
+- report data-minimization: {"authorized_aggregate_events_only":true,"raw_student_data_included":false,"event_refs_included":false,"source_events_used":1,"source_events_excluded":0,"authorized_scopes":["educational_report","teacher_report"]}
+- invalid-argument code: INVALID_ARGS
+- injection-rejection code: AEH_INJECTION_REJECTED
+- cancellation code: ABORTED_BEFORE_DISPATCH
+- timeout code: TOOL_TIMEOUT
+- tools after unload: 0
+OK: loader mount, dsh schema validation, cancellation, timeout, and unload verified in isolation.

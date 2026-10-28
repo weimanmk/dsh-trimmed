@@ -1,0 +1,77 @@
+{
+  "source_clone": {
+    "before": {
+      "root": "/home/hatch/workspace/deepseek-harness",
+      "file_count": 19203,
+      "symlink_count": 13,
+      "root_sha256": "24dd0f3a2115640d9542223b0cf882c8b692aee5adfb53fe60c505a56c3d4ce2"
+    },
+    "after": {
+      "root": "/home/hatch/workspace/deepseek-harness",
+      "file_count": 19203,
+      "symlink_count": 13,
+      "root_sha256": "24dd0f3a2115640d9542223b0cf882c8b692aee5adfb53fe60c505a56c3d4ce2"
+    },
+    "identical": true,
+    "diff": null
+  },
+  "dsh_home": {
+    "before": {
+      "root": "/home/hatch/.dsh",
+      "file_count": 92,
+      "symlink_count": 0,
+      "root_sha256": "0aa89cd3820586c8653ce180c7768d25b5cd84ffe23f35a2d0d4fba44063b939"
+    },
+    "after": {
+      "root": "/home/hatch/.dsh",
+      "file_count": 95,
+      "symlink_count": 0,
+      "root_sha256": "889f1eff0bb14c318f314d36b9c15c76574fc99abf1e65855e8ccb20f6ac9b63"
+    },
+    "identical": false,
+    "diff": {
+      "added": [
+        "sessions/--home-hatch-workspace-AEH--/e7e76526-0102-41d0-8506-2777201c7f7e/session.lock",
+        "sessions/--home-hatch-workspace-AEH--/e7e76526-0102-41d0-8506-2777201c7f7e/session.v4.jsonl.zstd",
+        "storages/session_projcache/sessions/e7e76526-0102-41d0-8506-2777201c7f7e.json"
+      ],
+      "removed": [],
+      "changed": [
+        "sessions/--home-hatch-workspace-AEH--/session-5015bbac-a802-4e18-b535-cdea89d9b3be/session.v4.jsonl.zstd",
+        "storages/session_projcache/sessions/session-5015bbac-a802-4e18-b535-cdea89d9b3be.json"
+      ]
+    }
+  },
+  "npx_dsh": {
+    "before": {
+      "root": "/home/hatch/.npm/_npx/1e7f6d9597241db0",
+      "file_count": 63053,
+      "symlink_count": 12,
+      "root_sha256": "119f92e0428d7b28d9daa41dfd24662374fb0e88489d0c11a7b0cf820cfb9441"
+    },
+    "after": {
+      "root": "/home/hatch/.npm/_npx/1e7f6d9597241db0",
+      "file_count": 63053,
+      "symlink_count": 12,
+      "root_sha256": "119f92e0428d7b28d9daa41dfd24662374fb0e88489d0c11a7b0cf820cfb9441"
+    },
+    "identical": true,
+    "diff": null
+  },
+  "step18_runtime": {
+    "before": {
+      "root": "/home/hatch/workspace/AEH/step18/runtime",
+      "file_count": 63072,
+      "symlink_count": 12,
+      "root_sha256": "d7407a1d10309cf9f34a7a256e162685369a3af17eac5940bd879ede04d5a7a8"
+    },
+    "after": {
+      "root": "/home/hatch/workspace/AEH/step18/runtime",
+      "file_count": 63072,
+      "symlink_count": 12,
+      "root_sha256": "d7407a1d10309cf9f34a7a256e162685369a3af17eac5940bd879ede04d5a7a8"
+    },
+    "identical": true,
+    "diff": null
+  }
+}

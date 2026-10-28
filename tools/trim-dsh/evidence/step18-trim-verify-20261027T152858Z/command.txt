@@ -1,0 +1,37 @@
+# Step 18 trimmed-dsh synthetic verification — rerun after native addon restore
+# UTC: 2026-10-27T15:28:58Z (run started) / 2026-10-27T15:29:27Z (turn completed)
+# cwd: /home/hatch/workspace/AEH
+# isolated DSH_HOME: /tmp/trim-smoke/home
+# isolated profile: aeh-e2e (Sidrune provider + AEH synthetic host entry)
+# task: task.md, copied byte-for-byte from the failed 152341Z run and fed on
+#   stdin to dsh's "-" task argument
+# credential: resolved at launch from the registered custom.sidrune connector as
+#   a surrogate credential; only placed in SIDRUNE_API_KEY for this child
+#   process, never printed and never written to this evidence directory.
+
+cd /home/hatch/workspace/AEH
+
+export SIDRUNE_API_KEY="$(
+  PYTHONPATH=/opt/hatch/workflow-skills/custom-connector-setup/bin \
+  python3 -c 'from dynamic_credentials import dynamic_credential_entry; print(dynamic_credential_entry("custom.sidrune","access_token")["surrogate"])'
+)"
+
+set +e
+env -u DSH_PROFILE_DIR -u DSH_SHELL -u DSH_SESSION_ID \
+  DSH_HOME=/tmp/trim-smoke/home \
+  DSH_PROFILE=aeh-e2e \
+  node /home/hatch/workspace/trim-build/apps/cli/lib/bin.js \
+    --profile aeh-e2e --json - \
+  < tools/trim-dsh/evidence/step18-trim-verify-20261027T152858Z/task.md \
+  > tools/trim-dsh/evidence/step18-trim-verify-20261027T152858Z/stdout.jsonl \
+  2> tools/trim-dsh/evidence/step18-trim-verify-20261027T152858Z/stderr.log
+
+RC=$?
+printf '%s\n' "$RC" > tools/trim-dsh/evidence/step18-trim-verify-20261027T152858Z/exit-code.txt
+
+# Result: exit code 0, turn completed. All six aeh_* tools were really called,
+# exactly once each, in the required order A -> B -> C -> D -> E -> F, and all
+# six returned status "completed".
+# No fallback to the running harness, the npx dsh, or step18/runtime was used.
+# Boot still warns (non-fatal) that typert-registry and api-gateway lib/index.js
+# are absent from the trimmed build, so 3 entries did not activate.

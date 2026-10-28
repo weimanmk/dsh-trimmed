@@ -1,0 +1,32 @@
+# Step 18 trimmed-dsh synthetic verification — exact command record
+# UTC: 2026-10-27T15:23:41Z (directory created) / run immediately after
+# cwd: /home/hatch/workspace/AEH
+# isolated DSH_HOME: /tmp/trim-smoke/home
+# isolated profile: aeh-e2e (Sidrune provider + AEH synthetic host entry)
+# task: task.md, fed on stdin to dsh's "-" task argument
+# credential: resolved at launch from the registered custom.sidrune connector as
+#   a surrogate credential; only placed in SIDRUNE_API_KEY for this child
+#   process, never printed and never written to this evidence directory.
+
+cd /home/hatch/workspace/AEH
+
+export SIDRUNE_API_KEY="$(
+  PYTHONPATH=/opt/hatch/workflow-skills/custom-connector-setup/bin \
+  python3 -c 'from dynamic_credentials import dynamic_credential_entry; print(dynamic_credential_entry("custom.sidrune","access_token")["surrogate"])'
+)"
+
+env -u DSH_PROFILE_DIR -u DSH_SHELL -u DSH_SESSION_ID \
+  DSH_HOME=/tmp/trim-smoke/home \
+  DSH_PROFILE=aeh-e2e \
+  node /home/hatch/workspace/trim-build/apps/cli/lib/bin.js \
+    --profile aeh-e2e --json - \
+  < task.md > stdout.jsonl 2> stderr.log
+
+printf '%s\n' "$?" > exit-code.txt
+
+# Result: exit code 1. dsh booted the profile but failed at session-persistence
+# startup because the trimmed build has no native flock addon:
+#   Cannot find module
+#   '/home/hatch/workspace/trim-build/native/system/packages/linux-x64/bin/glibc/system.node'
+# No model step or tool call ran; all six aeh_* call counts are 0.
+# No fallback to the running harness, the npx dsh, or step18/runtime was used.

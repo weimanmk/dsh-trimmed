@@ -1,0 +1,11 @@
+ℹ tsdown v0.22.2 powered by rolldown v1.1.1
+ℹ config file: /home/hatch/workspace/AEH/.scratch/trim-fix-copy/packages/api/gateway/tsdown.config.ts 
+ℹ entry: src/index.ts
+ℹ tsconfig: tsconfig.json
+ℹ Build start
+ℹ Cleaning 2 files
+ℹ dist/index.mjs    74.65 kB │ gzip: 19.51 kB
+ℹ dist/index.d.mts  15.49 kB │ gzip:  4.30 kB
+ℹ 2 files, total: 90.14 kB
+✔ Build complete in 1921ms
+packages/api/gateway: lib/index.js ABSENT

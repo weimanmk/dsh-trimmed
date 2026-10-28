@@ -1,0 +1,10 @@
+ℹ tsdown v0.22.2 powered by rolldown v1.1.1
+ℹ config file: /home/hatch/workspace/AEH/.scratch/trim-fix-copy/packages/typert/registry/tsdown.config.ts 
+ℹ [@deepseek-ai/dsh-typert-registry] entry: lib/types/index.js
+ℹ [@deepseek-ai/dsh-typert-registry] target: es2024
+ℹ [@deepseek-ai/dsh-typert-registry] tsconfig: tsconfig.json
+ℹ Build start
+ℹ [@deepseek-ai/dsh-typert-registry] lib/index.js  24.45 kB │ gzip: 5.54 kB
+ℹ [@deepseek-ai/dsh-typert-registry] 1 files, total: 24.45 kB
+✔ [@deepseek-ai/dsh-typert-registry] Build complete in 76ms
+packages/typert/registry: lib/index.js PRESENT 24449 bytes sha256=03371d2381c56785ef0885810dd427820cc11b66b436025095f83f8a76c631ed

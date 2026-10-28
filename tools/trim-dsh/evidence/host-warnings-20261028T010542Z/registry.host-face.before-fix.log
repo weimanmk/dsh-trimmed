@@ -1,0 +1,18 @@
+ℹ tsdown v0.22.2 powered by rolldown v1.1.1
+ℹ config file: /home/hatch/workspace/AEH/.scratch/trim-fix-copy/packages/typert/registry/tsdown.config.ts 
+ℹ entry: src/index.ts
+ℹ tsconfig: tsconfig.json
+ℹ Build start
+ℹ Cleaning 4 files
+ℹ dist/index.mjs        24.48 kB │ gzip:  5.56 kB
+ℹ dist/index.mjs.map    47.04 kB │ gzip: 10.64 kB
+ℹ dist/index.d.mts.map  12.97 kB │ gzip:  4.34 kB
+ℹ dist/index.d.mts      33.73 kB │ gzip:  8.52 kB
+ℹ 4 files, total: 118.22 kB
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - rolldown-plugin-dts:generate (64%)
+  - rolldown-plugin-dts:fake-js (31%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
+
+✔ Build complete in 11106ms
+packages/typert/registry: lib/index.js ABSENT

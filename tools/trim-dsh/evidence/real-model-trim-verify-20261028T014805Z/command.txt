@@ -1,0 +1,7 @@
+# Real-model trimmed-dsh verification — fresh isolated home, Sidrune model
+# Evidence dir: tools/trim-dsh/evidence/real-model-trim-verify-20261028T014805Z/
+# Isolated DSH_HOME: /tmp/trim-real/home (profile copied from step18/home/profiles/aeh-e2e/)
+# Task: task.md copied byte-for-byte from step18-trim-verify-20261027T152858Z, fed on stdin to dsh "-" task argument
+# Credential: resolved at launch from the registered custom.sidrune connector as a surrogate; only placed in SIDRUNE_API_KEY for the child process, never printed, never written here. Runner: /tmp/trim-real/run.sh
+# Command: env -u DSH_PROFILE_DIR -u DSH_SHELL -u DSH_SESSION_ID DSH_HOME=/tmp/trim-real/home DSH_PROFILE=aeh-e2e node /home/hatch/workspace/trim-build/apps/cli/lib/bin.js --profile aeh-e2e --json - < task.md > stdout.jsonl 2> stderr.log
+# Result: exit 0; 6 tool_call + 6 tool_result, each tool once in order, all completed, 0 errors, final completed.

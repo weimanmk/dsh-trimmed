@@ -1,0 +1,9 @@
+trim-build loader evidence (isolated staging, synthetic only)
+timestamp: 20261028T005943Z
+trim-build: /home/hatch/workspace/trim-build
+staging: /tmp/aeh-loader-trim-build-20261028T005943Z
+node: v24.22.1
+DSH_HOME: unset (the Cordis loader is a standalone in-process app)
+HOME: /home/hatch
+run 1: node scripts/loader-evidence.mjs
+run 2: node scripts/loader-evidence-exec.mjs

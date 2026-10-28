@@ -1,0 +1,4 @@
+{"type":"session","sessionId":"session-fd6f28c1-45fe-4b72-82cb-a31a3eff7d12","cwd":"/home/hatch/workspace/AEH"}
+{"type":"status","phase":"turn_start","turn":1}
+{"type":"status","phase":"turn_end","turn":1,"reason":{"kind":"error","error":{"message":"Cannot find module '/home/hatch/workspace/trim-build/native/system/packages/linux-x64/bin/glibc/system.node'\nRequire stack:\n- /home/hatch/workspace/trim-build/native/system/packages/entry/lib/flock.js","code":"UNKNOWN"}}}
+{"type":"error","message":"Cannot find module '/home/hatch/workspace/trim-build/native/system/packages/linux-x64/bin/glibc/system.node'\nRequire stack:\n- /home/hatch/workspace/trim-build/native/system/packages/entry/lib/flock.js"}
