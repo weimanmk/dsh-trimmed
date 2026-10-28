@@ -84,6 +84,47 @@ jobs:
           ) | Out-File dist-output/BUILD-INFO.txt -Encoding utf8
           Copy-Item PACKAGING-NOTES.md -Destination dist-output/PACKAGING-NOTES.md
 
+      - name: Stage installer tree
+        run: python tools/packaging/stage-installer.py --trimmed trimmed --stage installer-stage --node-version "24.22.1" --source-ref 22ddee3792402c3e70ec5f86a63c3e3e895a2f60
+
+      - name: Install Inno Setup
+        run: choco install innosetup --no-progress -y
+
+      - name: Read CLI version
+        id: cli-version
+        run: |
+          $pkg = Get-Content trimmed/apps/cli/package.json -Raw | ConvertFrom-Json
+          "version=$($pkg.version)" | Out-File $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      - name: Build installer
+        run: |
+          $iscc = (Get-Command ISCC.exe -ErrorAction SilentlyContinue).Source
+          if (-not $iscc) { $iscc = 'C:\Program Files (x86)\Inno Setup 6\ISCC.exe' }
+          & $iscc "/DAppVersion=${{ steps.cli-version.outputs.version }}" "/DStageDir=$PWD\installer-stage" "/O$PWD\installer-out" tools/packaging/dsh-trimmed.iss
+          if ($LASTEXITCODE -ne 0) { throw "ISCC failed with exit code $LASTEXITCODE" }
+          $LASTEXITCODE = 0
+
+      - name: Smoke test installer
+        run: |
+          $installDir = Join-Path $env:RUNNER_TEMP 'dsh-trimmed-install'
+          $setup = Get-ChildItem installer-out\dsh-trimmed-setup.exe | Select-Object -First 1 -ExpandProperty FullName
+          & $setup /SILENT /SUPPRESSMSGBOXES "/DIR=$installDir" /NORESTART
+          if ($LASTEXITCODE -ne 0) { throw "installer exited $LASTEXITCODE" }
+          $LASTEXITCODE = 0
+          $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'dsh-home-installed'
+          & "$installDir\dsh-trimmed.cmd" --help
+          if ($LASTEXITCODE -ne 0) { throw "installed CLI --help exited $LASTEXITCODE" }
+          $LASTEXITCODE = 0
+          & "$installDir\unins000.exe" /SILENT /SUPPRESSMSGBOXES
+          if (Test-Path $installDir) { throw "install dir still exists after uninstall" }
+
+      - name: Upload installer artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dsh-trimmed-setup
+          path: installer-out
+          if-no-files-found: error
+
       - name: Experimental single-file exe (SEA, best effort)
         continue-on-error: true
         run: |
