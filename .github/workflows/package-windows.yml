@@ -1,0 +1,97 @@
+name: Package trimmed dsh (Windows)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Check out trim scripts and docs
+        uses: actions/checkout@v4
+
+      - name: Check out upstream dsh source (pinned)
+        uses: actions/checkout@v4
+        with:
+          repository: deepseek-ai/deepseek-harness
+          ref: 22ddee3792402c3e70ec5f86a63c3e3e895a2f60
+          path: dsh-source
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - name: Regenerate trimmed copy
+        run: python tools/trim-dsh/trim.py --source dsh-source --dest trimmed --json-report trim-report-ci.json
+
+      - name: Repair build
+        run: python tools/trim-dsh/repair-build.py --copy trimmed --source dsh-source
+
+      - name: Install dependencies
+        working-directory: trimmed
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build host libraries
+        working-directory: trimmed
+        run: pnpm run build:lib:host
+
+      - name: Smoke test CLI --help
+        run: |
+          $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'dsh-home'
+          node trimmed/apps/cli/lib/bin.js --help
+
+      - name: Record build info
+        run: |
+          New-Item -ItemType Directory -Force -Path dist-output | Out-Null
+          Copy-Item trimmed/apps -Destination dist-output/apps -Recurse
+          Copy-Item trimmed/package.json -Destination dist-output/package.json
+          Copy-Item trimmed/pnpm-lock.yaml -Destination dist-output/pnpm-lock.yaml -ErrorAction SilentlyContinue
+          Copy-Item trim-report-ci.json -Destination dist-output/trim-report-ci.json
+          @(
+            'source=deepseek-ai/deepseek-harness@22ddee3792402c3e70ec5f86a63c3e3e895a2f60'
+            'built=build:lib:host on windows-latest; native addon NOT built (see PACKAGING-NOTES.md)'
+          ) | Out-File dist-output/BUILD-INFO.txt -Encoding utf8
+          Copy-Item PACKAGING-NOTES.md -Destination dist-output/PACKAGING-NOTES.md
+
+      - name: Experimental single-file exe (SEA, best effort)
+        continue-on-error: true
+        run: |
+          # Best-effort probe only: the CLI resolves workspace packages from
+          # node_modules, which a SEA blob cannot provide, so this is expected
+          # to fail until a bundled entry point exists. The outcome is recorded
+          # in sea-attempt.log; it never fails the job. See PACKAGING-NOTES.md.
+          @'
+          {"main": "trimmed/apps/cli/lib/bin.js", "output": "sea-prep.blob", "disableExperimentalSEAWarning": true}
+          '@ | Out-File sea-config.json -Encoding utf8
+          node --experimental-sea-config sea-config.json
+          Copy-Item (Get-Command node).Source -Destination dsh-trimmed-sea.exe
+          node --build-sea dsh-trimmed-sea.exe
+          $env:DSH_HOME = Join-Path $env:RUNNER_TEMP 'dsh-home-sea'
+          ./dsh-trimmed-sea.exe --help > sea-attempt.log 2>&1
+          Get-Content sea-attempt.log
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: trimmed-dsh-windows-build
+          path: dist-output
+          if-no-files-found: error
