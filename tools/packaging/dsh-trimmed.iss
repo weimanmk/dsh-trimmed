@@ -43,6 +43,7 @@ Name: "{group}\Uninstall DSH Trimmed"; Filename: "{uninstallexe}"
 ; comments use semicolons, not braces (braces are only comments in [Code]).
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\app"
+Type: dirifempty; Name: "{app}\app"
 Type: files; Name: "{app}\setup-tree-error.log"
 
 [Registry]
